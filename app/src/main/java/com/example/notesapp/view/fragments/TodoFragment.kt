@@ -29,12 +29,7 @@ class TodoFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.apply{
             newTodo.setOnKeyListener { view, keyCode, event ->
-                if(keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP){
-                    //updateTodoList()
-                    return@setOnKeyListener true
-                }else{
-                 return@setOnKeyListener false
-                }
+                return@setOnKeyListener keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP
             }
         }
     }
