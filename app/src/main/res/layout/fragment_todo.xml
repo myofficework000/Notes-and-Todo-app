@@ -53,13 +53,14 @@
                 android:buttonTint="@color/gray"/>
 
             <EditText
-                android:id="@+id/newNote"
+                android:id="@+id/newTodo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:inputType="text"
                 android:background="@android:color/transparent"
                 android:hint="@string/newTodo"
-                android:textColorHint="@color/gray"/>
+                android:textColorHint="@color/gray" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
