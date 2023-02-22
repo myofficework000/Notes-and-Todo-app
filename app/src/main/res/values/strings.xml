@@ -4,4 +4,6 @@
     <string name="newTodo">New Item</string>
     <string name="todoTitle">Title</string>
     <string name="todoItem">Todo Item</string>
-</resources>
+    <string name="addNote">Add Note</string>
+    <string name="addTodo">Add Todo</string>
+    ≈</resources>

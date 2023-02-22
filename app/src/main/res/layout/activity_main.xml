@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="@dimen/_20dp"
     tools:context=".view.MainActivity">
 
     <androidx.fragment.app.FragmentContainerView
@@ -16,6 +17,45 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">
-
     </androidx.fragment.app.FragmentContainerView>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:weightSum="3"
+        android:orientation="vertical">
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/noteBtn"
+            android:layout_gravity="right"
+            android:gravity="center"
+            android:visibility="gone"
+            android:text="@string/addNote"/>
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="@dimen/_15dp"
+            android:layout_marginBottom="@dimen/_15dp"
+            android:layout_weight="1"
+            android:id="@+id/todoBtn"
+            android:visibility="gone"
+            android:layout_gravity="right"
+            android:gravity="center"
+            android:text="@string/addTodo"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginBottom="@dimen/_15dp"
+            android:id="@+id/noteTodoBtn"
+            android:layout_gravity="right"
+            android:src="@drawable/baseline_add_24" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

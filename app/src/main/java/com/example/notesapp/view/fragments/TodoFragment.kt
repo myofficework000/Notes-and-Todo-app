@@ -1,26 +1,41 @@
 package com.example.notesapp.view.fragments
 
 import android.os.Bundle
+import android.util.Log
+import android.view.KeyEvent
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.example.notesapp.R
+import com.example.notesapp.databinding.FragmentDashboardBinding
 import com.example.notesapp.databinding.FragmentNotesBinding
+import com.example.notesapp.databinding.FragmentTodoBinding
+import com.example.notesapp.model.local.entity.Todo
+import com.example.notesapp.view.adapters.TodoAdapter
 
 class TodoFragment : Fragment() {
-    private lateinit var binding: FragmentNotesBinding
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        binding = FragmentNotesBinding.inflate(layoutInflater)
-        super.onCreate(savedInstanceState)
-    }
+    private lateinit var binding: FragmentTodoBinding
+    private lateinit var todoAdapter: TodoAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_todo, container, false)
+    ): View?  {
+        binding = FragmentTodoBinding.inflate(inflater,container,false)
+        return binding.root
     }
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.apply{
+            newTodo.setOnKeyListener { view, keyCode, event ->
+                if(keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP){
+                    //updateTodoList()
+                    return@setOnKeyListener true
+                }else{
+                 return@setOnKeyListener false
+                }
+            }
+        }
+    }
 }
