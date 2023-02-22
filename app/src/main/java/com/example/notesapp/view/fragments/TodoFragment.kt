@@ -6,21 +6,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.notesapp.R
+import com.example.notesapp.databinding.FragmentDashboardBinding
 import com.example.notesapp.databinding.FragmentNotesBinding
+import com.example.notesapp.databinding.FragmentTodoBinding
 
 class TodoFragment : Fragment() {
-    private lateinit var binding: FragmentNotesBinding
+    private lateinit var binding: FragmentTodoBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        binding = FragmentNotesBinding.inflate(layoutInflater)
-        super.onCreate(savedInstanceState)
-    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_todo, container, false)
+    ): View?  {
+        binding = FragmentTodoBinding.inflate(inflater,container,false)
+        return binding.root
     }
 
 }

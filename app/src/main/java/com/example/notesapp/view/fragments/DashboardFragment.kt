@@ -19,8 +19,7 @@ class DashboardFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_dashboard, container, false)
-        binding = FragmentDashboardBinding.bind(view)
+        binding = FragmentDashboardBinding.inflate(inflater, container, false)
         return binding.root
     }
 }
