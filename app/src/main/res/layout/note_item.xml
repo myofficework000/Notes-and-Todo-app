@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    app:cardBackgroundColor="@android:color/darker_gray"
+    app:cardCornerRadius="5dp"
+    app:cardElevation="@dimen/_size10dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp">
+
+        <LinearLayout
+            android:id="@+id/layoutToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imgCross"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="@+id/txtNoteTitle"
+                android:layout_margin="4dp"
+                android:padding="4dp"
+                android:src="@drawable/baseline_close_24"
+                app:tint="@color/white" />
+
+            <ImageView
+                android:id="@+id/imgLock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_margin="4dp"
+                android:padding="4dp"
+                android:src="@drawable/baseline_lock_open_24"
+                app:tint="@color/white" />
+
+            <ImageView
+                android:id="@+id/imgFavorite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_margin="4dp"
+                android:padding="4dp"
+                android:src="@drawable/baseline_star_24"
+                app:tint="@color/white" />
+
+            <ImageView
+                android:id="@+id/imgDelete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="@+id/txtNoteTitle"
+                android:layout_margin="4dp"
+                android:padding="4dp"
+                android:src="@drawable/baseline_delete_24"
+                app:tint="@color/white" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtNoteTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/layoutToolbar"
+            android:layout_margin="3dp"
+            android:padding="4dp"
+            android:text="Note Title"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/txtDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtNoteTitle"
+            android:layout_margin="3dp"
+            android:padding="4dp"
+            android:text="Updated At"
+            android:textColor="@color/white"
+            android:textSize="13sp" />
+
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
