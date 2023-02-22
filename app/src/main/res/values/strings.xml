@@ -6,4 +6,6 @@
     <string name="todoItem">Todo Item</string>
     <string name="addNote">Add Note</string>
     <string name="addTodo">Add Todo</string>
+    <string name="updateTime">Updated At</string>
+    <string name="noteTitle">Note Title</string>
     ≈</resources>
