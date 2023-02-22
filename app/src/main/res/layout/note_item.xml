@@ -6,12 +6,12 @@
     android:layout_margin="5dp"
     app:cardBackgroundColor="@android:color/darker_gray"
     app:cardCornerRadius="5dp"
-    app:cardElevation="@dimen/_size10dp">
+    app:cardElevation="@dimen/_10dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="4dp">
+        android:layout_margin="@dimen/_5dp">
 
         <LinearLayout
             android:id="@+id/layoutToolbar"
@@ -23,8 +23,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="@+id/txtNoteTitle"
-                android:layout_margin="4dp"
-                android:padding="4dp"
+                android:layout_margin="@dimen/_4dp"
+                android:padding="@dimen/_4dp"
                 android:src="@drawable/baseline_close_24"
                 app:tint="@color/white" />
 
@@ -35,8 +35,8 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_margin="4dp"
-                android:padding="4dp"
+                android:layout_margin="@dimen/_4dp"
+                android:padding="@dimen/_4dp"
                 android:src="@drawable/baseline_lock_open_24"
                 app:tint="@color/white" />
 
@@ -47,8 +47,8 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_margin="4dp"
-                android:padding="4dp"
+                android:layout_margin="@dimen/_4dp"
+                android:padding="@dimen/_4dp"
                 android:src="@drawable/baseline_star_24"
                 app:tint="@color/white" />
 
@@ -57,8 +57,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="@+id/txtNoteTitle"
-                android:layout_margin="4dp"
-                android:padding="4dp"
+                android:layout_margin="@dimen/_4dp"
+                android:padding="@dimen/_4dp"
                 android:src="@drawable/baseline_delete_24"
                 app:tint="@color/white" />
 
@@ -69,22 +69,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/layoutToolbar"
-            android:layout_margin="3dp"
-            android:padding="4dp"
-            android:text="Note Title"
+            android:layout_margin="@dimen/_4dp"
+            android:padding="@dimen/_4dp"
+            android:text="@string/noteTitle"
             android:textColor="@color/white"
-            android:textSize="18sp" />
+            android:textSize="@dimen/_18sp" />
 
         <TextView
             android:id="@+id/txtDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/txtNoteTitle"
-            android:layout_margin="3dp"
-            android:padding="4dp"
-            android:text="Updated At"
+            android:layout_margin="@dimen/_4dp"
+            android:padding="@dimen/_4dp"
+            android:text="@string/updateTime"
             android:textColor="@color/white"
-            android:textSize="13sp" />
+            android:textSize="@dimen/_13sp" />
 
 
     </RelativeLayout>
