@@ -5,6 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.notesapp.model.local.dao.NoteDao
+import com.example.notesapp.model.local.dao.TodoDao
 import com.example.notesapp.model.local.entity.Note
 import com.example.notesapp.model.local.entity.Todo
 
@@ -12,6 +13,7 @@ import com.example.notesapp.model.local.entity.Todo
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun getBlogDao(): NoteDao
+    abstract fun getTodoDao(): TodoDao
 
     companion object {
         private var INSTANCE: AppDatabase? = null
