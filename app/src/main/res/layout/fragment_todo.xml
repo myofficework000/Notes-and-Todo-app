@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:padding="@dimen/_20dp">
 
-        <EditText
+        <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/todoTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -52,7 +52,7 @@
                 android:layout_weight="1"
                 android:buttonTint="@color/gray"/>
 
-            <EditText
+            <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/newTodo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
