@@ -1,6 +1,7 @@
 package com.example.notesapp.model.local.dao
 
 import androidx.room.*
+import com.example.notesapp.model.Constants.TABLE_NAME_NOTES
 import com.example.notesapp.model.local.entity.Note
 
 @Dao
@@ -14,6 +15,6 @@ interface NoteDao {
     @Update
     fun update(note: Note)
 
-    @Query("SELECT * FROM Note")
+    @Query("SELECT * FROM $TABLE_NAME_NOTES")
     fun getAllNotes(): MutableList<Note>
 }
