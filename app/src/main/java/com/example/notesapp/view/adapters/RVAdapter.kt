@@ -17,7 +17,6 @@ class RVAdapter<T>(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH = itemBindingInflater(
         LayoutInflater.from(parent.context), parent, false, ::createVH
     )
-
     override fun getItemCount(): Int = items.count()
     override fun onBindViewHolder(holder: VH, position: Int) = holder.bind(items[position])
     inner class VH(view: View): RecyclerView.ViewHolder(view) { fun bind(item: T) = bindFunc(item) }
