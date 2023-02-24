@@ -5,15 +5,37 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.notesapp.databinding.FragmentDashboardBinding
+import com.example.notesapp.databinding.TodoItemBinding
 import com.example.notesapp.model.local.entity.Note
+import com.example.notesapp.model.local.entity.Todo
 import com.example.notesapp.view.adapters.NoteAdpater
+import com.example.notesapp.view.adapters.RVAdapter
+import com.example.notesapp.viewmodel.TodoViewModel
 
 class DashboardFragment : Fragment() {
 
     private lateinit var binding: FragmentDashboardBinding
     private lateinit var noteList: ArrayList<Note>
+    private val todoVM by lazy { ViewModelProvider(this)[TodoViewModel::class.java] }
+
+    private val todoItems = mutableListOf<Todo>()
+    private lateinit var todoBinding: TodoItemBinding
+    private val todoAdapter by lazy {
+        RVAdapter(
+            todoItems,
+            { inflater, container, attach, vh ->
+                TodoItemBinding.inflate(inflater, container, attach).apply {
+                    todoBinding = this
+                }.run { vh(root) }
+            }
+        ) {
+            todoBinding.todoItem.setText(it.title)
+            todoBinding.noteCheckBox.isChecked = it.isDone
+        }
+    }
 
     var floatingBtnVisible = false
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,6 +53,7 @@ class DashboardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         noteInterface()
+        initTodoList()
     }
 
     private fun noteInterface() {
@@ -114,4 +137,17 @@ class DashboardFragment : Fragment() {
         binding.RVNotes.adapter = NoteAdpater(noteList)
     }
 
+    private fun initTodoList() {
+        binding.RVTodo.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = todoAdapter
+        }
+        todoVM.allTodos.observe(viewLifecycleOwner) {
+            val oldSize = noteList.size
+            todoItems.clear()
+            todoAdapter.notifyItemRangeRemoved(0, oldSize)
+            todoItems.addAll(it)
+            todoAdapter.notifyItemRangeInserted(0, todoItems.size)
+        }
+    }
 }

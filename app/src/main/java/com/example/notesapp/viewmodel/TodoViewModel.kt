@@ -9,11 +9,11 @@ import com.example.notesapp.model.local.entity.Todo
 class TodoViewModel(application: Application) : AndroidViewModel(application) {
 
     val allTodos: LiveData<List<Todo>>
-    val dao by lazy { AppDatabase.getInstance(application).getTodoDao() }
+    private val dao by lazy { AppDatabase.getInstance(application).getTodoDao() }
 
     init {
-        allTodos = dao.getAllTodo()
         // It needs to be assured that dao exists at this stage. Otherwise it's worth crashing.
+        allTodos = dao.getAllTodo()
     }
 
     fun addTodo(data: Todo) = dao.addTodo(data)
