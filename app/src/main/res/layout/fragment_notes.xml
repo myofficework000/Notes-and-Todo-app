@@ -1,92 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/notesFragment"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:id="@+id/notesFragment"
     tools:context=".view.fragments.NotesFragment">
 
-    <RelativeLayout
+    <LinearLayout
+        android:id="@+id/layoutToolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/black"
+        >
 
-        <LinearLayout
-            android:id="@+id/layoutToolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btnClose"
+            android:backgroundTint="@android:color/transparent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="@+id/txtNoteTitle"
+            android:layout_margin="@dimen/_4dp"
+            android:padding="@dimen/_4dp"
+            android:src="@drawable/baseline_close_24"
+            app:tint="@color/white" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/imgCross"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/_4dp"
-                android:src="@drawable/baseline_close_24"
-                app:tint="@color/gray" />
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btnLocked"
+            android:backgroundTint="@android:color/transparent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="@dimen/_4dp"
+            android:padding="@dimen/_4dp"
+            android:src="@drawable/baseline_lock_open_24"
+            app:tint="@color/white" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/imgLock"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_10dp"
-                android:padding="@dimen/_4dp"
-                android:src="@drawable/baseline_lock_open_24"
-                app:tint="@color/gray" />
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btnStarred"
+            android:backgroundTint="@android:color/transparent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="@dimen/_4dp"
+            android:padding="@dimen/_4dp"
+            android:src="@drawable/baseline_star_24"
+            app:tint="@color/white" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/imgFavorite"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_10dp"
-                android:padding="@dimen/_4dp"
-                android:src="@drawable/baseline_star_24"
-                app:tint="@color/gray" />
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/imgDelete"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_10dp"
-                android:padding="@dimen/_4dp"
-                android:src="@drawable/baseline_delete_24"
-                app:tint="@color/gray" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/layoutToolbar"
-            android:layout_marginTop="@dimen/_10dp"
-            android:orientation="vertical">
-
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/edNoteTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:fontFamily="sans-serif"
-                android:hint="@string/Title"
-                android:inputType="text"
-                android:maxLines="1"
-                android:padding="@dimen/_4dp"
-                android:textSize="@dimen/_20sp"
-                android:textStyle="bold" />
-
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/edNoteBody"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="@dimen/_4dp"
-                android:background="@color/white"
-                android:fontFamily="monospace"
-                android:gravity="start"
-                android:hint="@string/notes"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_13sp" />
-
-        </LinearLayout>
-    </RelativeLayout>
-
-
-</FrameLayout>
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btnDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="@+id/txtNoteTitle"
+            android:layout_margin="@dimen/_4dp"
+            android:padding="@dimen/_4dp"
+            android:backgroundTint="@android:color/transparent"
+            android:src="@drawable/baseline_delete_24"
+            app:tint="@color/white" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            />
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btnSave"
+            android:backgroundTint="@android:color/transparent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_save_24"
+            />
+    </LinearLayout>
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/inputTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/layoutToolbar"
+        android:hint="Title"
+        />
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/inputBody"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/inputTitle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:hint="Note body"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>
