@@ -6,7 +6,7 @@ import android.view.View
 import com.example.notesapp.R
 import com.example.notesapp.databinding.ActivityMainBinding
 import com.example.notesapp.view.fragments.NotesFragment
-import com.example.notesapp.view.fragments.TodoFragment
+import com.example.notesapp.view.fragments.TodoDialog
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -42,7 +42,8 @@ class MainActivity : AppCompatActivity() {
             }
 
             todoBtn.setOnClickListener {
-                fragmentManger.beginTransaction().replace(R.id.dashboardFragment, TodoFragment()).commit()
+                //fragmentManger.beginTransaction().replace(R.id.dashboardFragment, TodoFragment()).commit()
+                TodoDialog().show(supportFragmentManager,"TodoDialog")
             }
 
             noteBtn.setOnClickListener {

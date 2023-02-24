@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.notesapp.R
 import com.example.notesapp.databinding.FragmentNotesBinding
-import com.example.notesapp.databinding.FragmentTodoBinding
+import com.example.notesapp.databinding.TodoDialogBinding
 
 class NotesFragment : Fragment() {
     private lateinit var binding: FragmentNotesBinding

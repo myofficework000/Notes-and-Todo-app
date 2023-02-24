@@ -10,5 +10,5 @@ data class Todo(
     @ColumnInfo(name = "title") val title: String,
     @PrimaryKey(autoGenerate = true) var index: Int = 0,
     @ColumnInfo(name = "isDone") val isDone: Boolean,
-    @ColumnInfo(name = "priority") var priority: Int = 0
+    @ColumnInfo(name = "priority") var priority: String = "Medium"
 )

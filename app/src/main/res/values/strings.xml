@@ -8,5 +8,16 @@
     <string name="addTodo">Add Todo</string>
     <string name="updateTime">Updated At</string>
     <string name="noteTitle">Note Title</string>
-    ≈
+
+    <string-array name="Priority">
+        <item>Low</item>
+        <item>Medium</item>
+        <item>High</item>
+    </string-array>
+
+    <string-array name="Category">
+        <item>Category 1</item>
+        <item>Category 2</item>
+        <item>Category 3</item>
+    </string-array>
 </resources>
