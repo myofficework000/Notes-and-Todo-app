@@ -9,4 +9,8 @@
     <dimen name="_4dp">4dp</dimen>
     <dimen name="_13sp">13sp</dimen>
     <dimen name="_18sp">18sp</dimen>
+    <dimen name="_15sp">15dp</dimen>
+    <dimen name="_30dp">30dp</dimen>
+    <dimen name="_40dp">40dp</dimen>
+    <dimen name="_0dp">0dp</dimen>
 </resources>
