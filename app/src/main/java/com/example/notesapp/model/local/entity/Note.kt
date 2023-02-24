@@ -10,15 +10,15 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 @Entity(tableName = TABLE_NAME_NOTES)
 data class Note(
-    @ColumnInfo(name = "title") val title: String,
-    @ColumnInfo(name = "body") val body: String,
+    @ColumnInfo(name = "title") var title: String,
+    @ColumnInfo(name = "body") var body: String,
     @ColumnInfo(name = "date") val date: String,
     @ColumnInfo(name = "passcode") val passcode: String,
     @ColumnInfo(name = "bodyFontSize") val bodyFontSize: String = "14",
     @ColumnInfo(name = "textColor") val textColor: String,
     @ColumnInfo(name = "backgroundColor") val bgColor: String,
-    @ColumnInfo(name = "isStarred") val isStarred: String,
-    @ColumnInfo(name = "isLocked") val isLocked: String,
+    @ColumnInfo(name = "isStarred") var isStarred: String,
+    @ColumnInfo(name = "isLocked") var isLocked: String,
     @PrimaryKey(autoGenerate = true) var index: Int = 0,
     @ColumnInfo(name = "urlLink") var urlLink: String
 ) : Parcelable
