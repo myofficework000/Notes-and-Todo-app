@@ -20,9 +20,13 @@
         <item>Category 2</item>
         <item>Category 3</item>
     </string-array>
+    <string name="prioritySpinnerHint">Set Priority</string>
+    <string name="categorySpinnerHint">Set Category</string>
+
     <string name="Title">Title</string>
     <string name="notes">Enter notes here</string>
     <string name="txtBody">Your note is here</string>
     <string name="category">Category</string>
+
 
 </resources>

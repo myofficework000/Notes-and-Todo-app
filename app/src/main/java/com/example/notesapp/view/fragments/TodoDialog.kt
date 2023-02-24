@@ -2,6 +2,8 @@ package com.example.notesapp.view.fragments
 
 import android.os.Bundle
 import android.view.*
+import android.widget.AdapterView
+import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isNotEmpty
@@ -19,22 +21,7 @@ import java.util.*
 class TodoDialog : DialogFragment() {
     private lateinit var todoViewModel: TodoViewModel
     private lateinit var binding: TodoDialogBinding
-    private lateinit var todoBinding: TodoItemBinding
     private val todoItems = mutableListOf<Todo>()
-
-    /*private val todoAdapter by lazy {
-        RVAdapter(
-            todoItems,
-            { inflater, container, attach, vh ->
-                TodoItemBinding.inflate(inflater, container, attach).apply {
-                    todoBinding = this
-                }.run { vh(root) }
-            }
-        ) {
-            todoBinding.todoItem.setText(it.title)
-            todoBinding.noteCheckBox.isChecked = it.isDone
-        }
-    }*/
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -78,8 +65,27 @@ class TodoDialog : DialogFragment() {
     }
 
     private fun addItemsToSpinner() {
-        val priorities = resources.getStringArray(R.array.Priority)
-        val categories = resources.getStringArray(R.array.Category)
+        binding.prioritySpinner.apply {
+            setAdapter(ArrayAdapter(
+                requireContext(),
+                android.R.layout.simple_list_item_1,
+                resources.getStringArray(R.array.Priority)
+            ))
+            setOnFocusChangeListener { _, b ->
+                if (b) showDropDown()
+            }
+        }
+
+        binding.categorySpinner.apply {
+            setAdapter(ArrayAdapter(
+                requireContext(),
+                android.R.layout.simple_list_item_1,
+                resources.getStringArray(R.array.Category)
+            ))
+            setOnFocusChangeListener { _, b ->
+                if (b) showDropDown()
+            }
+        }
     }
 
     private fun notifySuccess() {
