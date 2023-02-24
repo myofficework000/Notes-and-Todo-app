@@ -9,7 +9,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/dashboardFragment"
-        android:name="com.example.notesapp.viewmodel.fragments.DashboardFragment"
+        android:name="com.example.notesapp.view.fragments.DashboardFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:layout="@layout/fragment_dashboard"

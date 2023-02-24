@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/notesFragment"
-    tools:context=".viewmodel.fragments.NotesFragment">
+    tools:context=".view.fragments.NotesFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"

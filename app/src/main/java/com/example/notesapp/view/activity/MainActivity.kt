@@ -5,8 +5,8 @@ import android.os.Bundle
 import android.view.View
 import com.example.notesapp.R
 import com.example.notesapp.databinding.ActivityMainBinding
-import com.example.notesapp.viewmodel.fragments.NotesFragment
-import com.example.notesapp.viewmodel.fragments.TodoFragment
+import com.example.notesapp.view.fragments.NotesFragment
+import com.example.notesapp.view.fragments.TodoFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
