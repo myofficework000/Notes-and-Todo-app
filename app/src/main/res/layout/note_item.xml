@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
+    android:layout_width="200dp"
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
     app:cardBackgroundColor="@android:color/darker_gray"
@@ -9,84 +9,83 @@
     app:cardElevation="@dimen/_10dp">
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_5dp">
+        android:layout_width="wrap_content"
+        android:layout_height="300dp" >
 
         <LinearLayout
             android:id="@+id/layoutToolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/imgCross"
+            <TextView
+                android:id="@+id/txtCategory"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="@+id/txtNoteTitle"
-                android:layout_margin="@dimen/_4dp"
+                android:layout_marginStart="@dimen/_4dp"
+                android:layout_marginTop="@dimen/_4dp"
+                android:layout_marginEnd="@dimen/_4dp"
+                android:layout_marginBottom="@dimen/_4dp"
                 android:padding="@dimen/_4dp"
-                android:src="@drawable/baseline_close_24"
-                app:tint="@color/white" />
+                android:text="@string/category"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_13sp" />
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imgLock"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_margin="@dimen/_4dp"
+                android:layout_marginStart="@dimen/_10dp"
                 android:padding="@dimen/_4dp"
-                android:src="@drawable/baseline_lock_open_24"
-                app:tint="@color/white" />
+                android:src="@drawable/baseline_lock_open_24" />
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imgFavorite"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_margin="@dimen/_4dp"
+                android:layout_marginStart="@dimen/_10dp"
                 android:padding="@dimen/_4dp"
-                android:src="@drawable/baseline_star_24"
-                app:tint="@color/white" />
-
-            <ImageView
-                android:id="@+id/imgDelete"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="@+id/txtNoteTitle"
-                android:layout_margin="@dimen/_4dp"
-                android:padding="@dimen/_4dp"
-                android:src="@drawable/baseline_delete_24"
-                app:tint="@color/white" />
+                android:src="@drawable/baseline_star_24" />
 
         </LinearLayout>
 
         <TextView
             android:id="@+id/txtNoteTitle"
+            android:layout_below="@+id/layoutToolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/layoutToolbar"
+            android:fontFamily="sans-serif"
             android:layout_margin="@dimen/_4dp"
+            android:maxLines="1"
             android:padding="@dimen/_4dp"
             android:text="@string/noteTitle"
             android:textColor="@color/white"
-            android:textSize="@dimen/_18sp" />
+            android:textStyle="bold"
+            android:textSize="@dimen/_20sp" />
 
         <TextView
-            android:id="@+id/txtDate"
+            android:id="@+id/txtNoteBody"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/txtNoteTitle"
             android:layout_margin="@dimen/_4dp"
             android:padding="@dimen/_4dp"
+            android:text="@string/txtBody"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_15sp" />
+
+        <TextView
+            android:id="@+id/txtDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="@dimen/_4dp"
+            android:layout_marginTop="@dimen/_4dp"
+            android:layout_marginEnd="@dimen/_4dp"
+            android:layout_marginBottom="@dimen/_4dp"
+            android:padding="@dimen/_4dp"
             android:text="@string/updateTime"
             android:textColor="@color/white"
             android:textSize="@dimen/_13sp" />
-
-
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

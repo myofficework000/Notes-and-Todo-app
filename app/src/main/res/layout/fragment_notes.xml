@@ -1,24 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/notesFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/notesFragment"
+    android:orientation="vertical"
     tools:context=".view.fragments.NotesFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewNote"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_5dp"
-            tools:itemCount="5"
-            tools:listitem="@layout/note_item" />
+        <LinearLayout
+            android:id="@+id/layoutToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imgCross"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_4dp"
+                android:src="@drawable/baseline_close_24"
+                app:tint="@color/gray" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imgLock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10dp"
+                android:padding="@dimen/_4dp"
+                android:src="@drawable/baseline_lock_open_24"
+                app:tint="@color/gray" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imgFavorite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10dp"
+                android:padding="@dimen/_4dp"
+                android:src="@drawable/baseline_star_24"
+                app:tint="@color/gray" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imgDelete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10dp"
+                android:padding="@dimen/_4dp"
+                android:src="@drawable/baseline_delete_24"
+                app:tint="@color/gray" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/layoutToolbar"
+            android:layout_marginTop="@dimen/_10dp"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edNoteTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:fontFamily="sans-serif"
+                android:hint="@string/Title"
+                android:inputType="text"
+                android:maxLines="1"
+                android:padding="@dimen/_4dp"
+                android:textSize="@dimen/_20sp"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edNoteBody"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/_4dp"
+                android:background="@color/white"
+                android:fontFamily="monospace"
+                android:gravity="start"
+                android:hint="@string/notes"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_13sp" />
+
+        </LinearLayout>
     </RelativeLayout>
+
 
 </FrameLayout>

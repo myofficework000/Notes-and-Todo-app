@@ -28,9 +28,17 @@ class SplashScreen : AppCompatActivity() {
                 }
             })
         }
+        //val slideAnim = AnimationUtils.loadAnimation(this, R.anim.zoom_in_zoom_out)
+        val rightToLeft = AnimationUtils.loadAnimation(this,R.anim.right_to_left)
 
+//        binding.notes.apply {
+//            startAnimation(slideAnim)
+//        }
         binding.notes.apply {
-            startAnimation(slideAnim)
+
+        }
+        binding.pen.apply {
+            startAnimation(rightToLeft)
         }
 
     }
