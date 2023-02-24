@@ -19,27 +19,21 @@ class MainActivity : AppCompatActivity() {
         initView()
 
     }
-
     private fun initView() {
         binding.apply {
             noteTodoBtn.setOnClickListener {
                 if (!floatingBtnVisible) {
-                    noteBtn.show()
-                    todoBtn.show()
-                    noteBtn.visibility = View.VISIBLE
-                    todoBtn.visibility = View.VISIBLE
-                    noteTodoBtn.setImageResource(R.drawable.baseline_floating_close_24)
-                    floatingBtnVisible = true
+                    expandFloatingButton()
                 } else {
                     hideFloatingButton()
                 }
             }
-
             todoBtn.setOnClickListener {
                 //fragmentManger.beginTransaction().replace(R.id.dashboardFragment, TodoFragment()).commit()
-                TodoDialog().show(supportFragmentManager, "TodoDialog")
-            }
 
+                TodoDialog().show(supportFragmentManager,"TodoDialog")
+                hideFloatingButton()
+            }
             noteBtn.setOnClickListener {
                 fragmentManger.beginTransaction()
                     .add(R.id.dashboardFragment, NotesFragment())
@@ -49,7 +43,16 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
+    private fun expandFloatingButton(){
+        binding.apply{
+            noteBtn.show()
+            todoBtn.show()
+            noteBtn.visibility = View.VISIBLE
+            todoBtn.visibility = View.VISIBLE
+            noteTodoBtn.setImageResource(R.drawable.baseline_floating_close_24)
+            floatingBtnVisible = true
+        }
+    }
     override fun onBackPressed() {
         val count = supportFragmentManager.backStackEntryCount
 
@@ -60,7 +63,6 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.popBackStack()
         }
     }
-
     private fun hideFloatingButton() {
         binding.apply {
             noteBtn.hide()
