@@ -5,12 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.notesapp.R
 import com.example.notesapp.databinding.FragmentNotesBinding
-import com.example.notesapp.databinding.TodoDialogBinding
+import com.example.notesapp.view.adapters.NoteAdpater
 
 class NotesFragment : Fragment() {
     private lateinit var binding: FragmentNotesBinding
+    private lateinit var noteAdpater: NoteAdpater
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -19,5 +19,4 @@ class NotesFragment : Fragment() {
         binding = FragmentNotesBinding.inflate(inflater,container,false)
         return binding.root
     }
-
 }

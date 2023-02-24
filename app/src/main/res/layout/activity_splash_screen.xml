@@ -17,4 +17,15 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/baseline_event_note_24" />
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/pen"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="150dp"
+        android:background="#05F1EEEE"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/baseline_edit_24" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
