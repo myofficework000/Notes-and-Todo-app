@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/cancelIcon"
             android:layout_width="@dimen/_40dp"
             android:layout_height="@dimen/_40dp"
@@ -22,7 +22,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/doneIcon"
             android:layout_width="@dimen/_40dp"
             android:layout_height="@dimen/_40dp"
@@ -45,29 +45,41 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cancelIcon" />
 
-        <com.google.android.material.textfield.MaterialAutoCompleteTextView
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/prioritySpinner"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_20dp"
-            android:layout_marginBottom="@dimen/_20dp"
-            android:hint="@string/prioritySpinnerHint"
-            android:inputType="number"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/categorySpinner"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="@+id/todoItemEdit"
-            app:layout_constraintTop_toBottomOf="@id/todoItemEdit" />
+            app:layout_constraintTop_toBottomOf="@id/todoItemEdit"
+            android:hint="@string/prioritySpinnerHint">
+            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                style="@style/Widget.MaterialComponents.AutoCompleteTextView.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:text="@string/priorityDefault" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.MaterialAutoCompleteTextView
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/categorySpinner"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="@string/categorySpinnerHint"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             app:layout_constraintBottom_toBottomOf="@+id/prioritySpinner"
             app:layout_constraintEnd_toEndOf="@+id/todoItemEdit"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toEndOf="@id/prioritySpinner"
-            app:layout_constraintTop_toTopOf="@+id/prioritySpinner" />
+            app:layout_constraintTop_toTopOf="@+id/prioritySpinner"
+            android:hint="@string/categorySpinnerHint">
+            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                style="@style/Widget.MaterialComponents.AutoCompleteTextView.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

@@ -1,25 +1,26 @@
 package com.example.notesapp.view.fragments
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.*
-import android.widget.AdapterView
-import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import androidx.appcompat.app.AlertDialog
-import androidx.core.view.isNotEmpty
+import androidx.core.text.isDigitsOnly
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.notesapp.R
 import com.example.notesapp.databinding.TodoDialogBinding
-import com.example.notesapp.databinding.TodoItemBinding
 import com.example.notesapp.model.local.entity.Todo
-import com.example.notesapp.view.adapters.RVAdapter
 import com.example.notesapp.viewmodel.TodoViewModel
 import java.util.*
 
 class TodoDialog : DialogFragment() {
-    private lateinit var todoViewModel: TodoViewModel
+    private val todoVM by lazy { ViewModelProvider(this)[TodoViewModel::class.java] }
     private lateinit var binding: TodoDialogBinding
     private val todoItems = mutableListOf<Todo>()
 
@@ -33,7 +34,6 @@ class TodoDialog : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initializeViewModel()
         addItemsToSpinner()
         val isDoneDefault = false
         binding.apply {
@@ -41,14 +41,16 @@ class TodoDialog : DialogFragment() {
                 if ("${todoItemEdit.text}".isNotEmpty()) {
                     with(
                         Todo(
-                            "${todoItemEdit.text}",
-                            0,
-                            isDoneDefault
+                            title = todoItemEdit.text.toString(),
+                            priority = prioritySpinner.editText?.text.toString(),
+                            category = categorySpinner.editText?.text.toString(),
+                            isDone = isDoneDefault
                         )
                     ) {
                         todoItems.add(this)
-                        todoViewModel.addTodo(this)
+                        todoVM.addTodo(this)
                         notifySuccess()
+                        clearForm()
                     }
                     todoItemEdit.setText("")
                 }
@@ -57,35 +59,48 @@ class TodoDialog : DialogFragment() {
                 dialog?.dismiss()
             }
         }
-
-       /* binding.todoReCyclerDashBoard.apply {
-            layoutManager = LinearLayoutManager(context)
-            adapter = todoAdapter
-        }*/
     }
 
     private fun addItemsToSpinner() {
-        binding.prioritySpinner.apply {
+        val defaultPriorityList = resources.getStringArray(R.array.Priority)
+        (binding.prioritySpinner.editText as AutoCompleteTextView).apply {
             setAdapter(ArrayAdapter(
                 requireContext(),
                 android.R.layout.simple_list_item_1,
-                resources.getStringArray(R.array.Priority)
+                defaultPriorityList
             ))
             setOnFocusChangeListener { _, b ->
                 if (b) showDropDown()
+                else if (!defaultPriorityList.contains(text.toString()) &&
+                    (!text.isDigitsOnly() || text.isBlank())
+                ) setText(getString(R.string.priorityDefault))
+            }
+            addTextChangedListener {
+                if (it?.isBlank() != false)
+                    Handler(Looper.getMainLooper())
+                        .postDelayed({ showDropDown() }, 100)
             }
         }
 
-        binding.categorySpinner.apply {
+        (binding.categorySpinner.editText as AutoCompleteTextView).apply {
             setAdapter(ArrayAdapter(
                 requireContext(),
                 android.R.layout.simple_list_item_1,
                 resources.getStringArray(R.array.Category)
             ))
-            setOnFocusChangeListener { _, b ->
-                if (b) showDropDown()
+            setOnFocusChangeListener { _, b -> if (b) showDropDown() }
+            addTextChangedListener {
+                if (it?.isBlank() != false)
+                    Handler(Looper.getMainLooper())
+                        .postDelayed({ showDropDown() }, 100)
             }
         }
+    }
+
+    private fun clearForm() {
+        binding.todoItemEdit.text?.clear()
+        binding.prioritySpinner.editText?.setText(getString(R.string.priorityDefault))
+        binding.categorySpinner.editText?.text?.clear()
     }
 
     private fun notifySuccess() {
@@ -122,8 +137,5 @@ class TodoDialog : DialogFragment() {
     override fun onStop() {
         super.onStop()
         customizeDialog()
-    }
-    private fun initializeViewModel() {
-        todoViewModel = ViewModelProvider(requireActivity())[TodoViewModel::class.java]
     }
 }
