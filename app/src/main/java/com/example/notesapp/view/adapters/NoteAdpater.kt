@@ -10,7 +10,7 @@ import com.example.notesapp.databinding.NoteItemBinding
 import com.example.notesapp.model.local.entity.Note
 import com.example.notesapp.view.fragments.NotesFragment
 
-class NoteAdpater(private val noteList: ArrayList<Note>): RecyclerView.Adapter<NoteAdpater.NotesViewHolder>() {
+class NoteAdpater(private val noteList: List<Note>): RecyclerView.Adapter<NoteAdpater.NotesViewHolder>() {
     private lateinit var noteItemBinding: NoteItemBinding
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotesViewHolder {

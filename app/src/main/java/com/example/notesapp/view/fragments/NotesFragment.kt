@@ -48,7 +48,7 @@ class NotesFragment : Fragment() {
 
     private fun initDatabase() {
         db = AppDatabase.getInstance(requireContext())
-        noteDao = db.getBlogDao()
+        noteDao = db.getNoteDao()
     }
 
     private fun initData() {
