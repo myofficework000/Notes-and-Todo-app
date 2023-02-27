@@ -9,22 +9,46 @@ import android.widget.Toast
 import androidx.core.widget.doAfterTextChanged
 import com.example.notesapp.R
 import com.example.notesapp.databinding.FragmentNotesBinding
+import com.example.notesapp.model.local.AppDatabase
+import com.example.notesapp.model.local.dao.NoteDao
 import com.example.notesapp.model.local.entity.Note
 import java.util.Calendar
+
+fun Note.copy(): Note = Note(
+    this.title,
+    this.body,
+    this.date,
+    this.passcode,
+    this.bodyFontSize,
+    this.textColor,
+    this.bgColor,
+    this.isStarred,
+    this.isLocked,
+    this.index,
+    this.urlLink,
+)
 
 class NotesFragment : Fragment() {
     private lateinit var binding: FragmentNotesBinding
     private lateinit var note: Note
     private lateinit var editingNote: Note
+    private lateinit var db: AppDatabase
+    private lateinit var noteDao: NoteDao
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentNotesBinding.inflate(inflater, container, false)
+        initDatabase()
         initData()
         initViews()
         return binding.root
+    }
+
+    private fun initDatabase() {
+        db = AppDatabase.getInstance(requireContext())
+        noteDao = db.getBlogDao()
     }
 
     private fun initData() {
@@ -62,7 +86,7 @@ class NotesFragment : Fragment() {
                 ""
             )
         }
-        editingNote = note
+        editingNote = note.copy()
     }
 
     private fun initViews() {
@@ -130,7 +154,14 @@ class NotesFragment : Fragment() {
 
     private fun saveNoteClick() {
         if (editingNote != note) {
-            note = editingNote
+            if(note.index <= 0) {
+                note = editingNote.copy()
+                noteDao.insert(note)
+            }
+            else {
+                note = editingNote.copy()
+                noteDao.update(note)
+            }
             Toast.makeText(requireContext(), "Saved successfully", Toast.LENGTH_SHORT).show()
         } else {
             Toast.makeText(requireContext(), "Nothing to save", Toast.LENGTH_SHORT).show()
