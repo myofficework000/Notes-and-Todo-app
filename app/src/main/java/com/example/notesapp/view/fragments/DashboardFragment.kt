@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.notesapp.R
 import com.example.notesapp.databinding.FragmentDashboardBinding
 import com.example.notesapp.databinding.TodoItemBinding
 import com.example.notesapp.model.local.entity.Note
@@ -34,6 +36,16 @@ class DashboardFragment : Fragment() {
         ) {
             todoBinding.todoItem.setText(it.title)
             todoBinding.noteCheckBox.isChecked = it.isDone
+            todoBinding.deletetodo.setOnClickListener {_ ->
+                AlertDialog.Builder(requireContext())
+                    .setTitle(R.string.deleting)
+                    .setMessage(R.string.todoDeleteMsg)
+                    .setNegativeButton(R.string.dialogNo) {_,_->}
+                    .setPositiveButton(R.string.dialogYes) {_,_->
+                        todoVM.deleteTodo(it)
+                    }
+                    .show()
+            }
         }
     }
 

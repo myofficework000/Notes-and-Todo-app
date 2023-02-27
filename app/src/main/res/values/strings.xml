@@ -6,8 +6,12 @@
     <string name="todoItem">Todo Item</string>
     <string name="addNote">Add Note</string>
     <string name="addTodo">Add Todo</string>
+    <string name="deleting">Deleting…</string>
+    <string name="todoDeleteMsg">Are you sure?</string>
     <string name="updateTime">Updated At</string>
     <string name="noteTitle">Note Title</string>
+    <string name="dialogYes">Go ahead</string>
+    <string name="dialogNo">Wait</string>
 
     <string-array name="Priority">
         <item>Low</item>
