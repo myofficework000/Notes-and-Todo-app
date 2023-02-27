@@ -37,7 +37,7 @@ class TodoDialog : DialogFragment() {
         addItemsToSpinner()
         val isDoneDefault = false
         binding.apply {
-            doneIcon.setOnClickListener {
+            addBtn.setOnClickListener {
                 if ("${todoItemEdit.text}".isNotEmpty()) {
                     with(
                         Todo(
@@ -55,12 +55,12 @@ class TodoDialog : DialogFragment() {
                     todoItemEdit.setText("")
                 }
             }
-            cancelIcon.setOnClickListener {
+            cancelBtn.setOnClickListener {
                 dialog?.dismiss()
             }
+            newTaskEditLayout.let{}
         }
     }
-
     private fun addItemsToSpinner() {
         val defaultPriorityList = resources.getStringArray(R.array.Priority)
         (binding.prioritySpinner.editText as AutoCompleteTextView).apply {
@@ -119,7 +119,7 @@ class TodoDialog : DialogFragment() {
                 dialog.dismiss()
                 timer.cancel()
             }
-        },700)
+        },900)
     }
     override fun onResume() {
         super.onResume()
