@@ -21,7 +21,7 @@ class DashboardFragment : Fragment() {
 
     private lateinit var binding: FragmentDashboardBinding
     private lateinit var noteList: ArrayList<Note>
-    private val todoVM by lazy { ViewModelProvider(this)[TodoViewModel::class.java] }
+    private val todoVM by lazy { ViewModelProvider(requireActivity())[TodoViewModel::class.java] }
 
     private val todoItems = mutableListOf<Todo>()
     private lateinit var todoBinding: TodoItemBinding
@@ -33,17 +33,18 @@ class DashboardFragment : Fragment() {
                     todoBinding = this
                 }.run { vh(root) }
             }
-        ) {
+        ) { it, _ ->
             todoBinding.todoItem.setText(it.title)
-            todoBinding.noteCheckBox.isChecked = it.isDone
+            todoBinding.noteCheckBox.apply{
+                isChecked = it.isDone
+                setOnClickListener { _-> todoVM.updateTodo( it.copy(isDone = isChecked) ) }
+            }
             todoBinding.deletetodo.setOnClickListener {_ ->
                 AlertDialog.Builder(requireContext())
                     .setTitle(R.string.deleting)
                     .setMessage(R.string.todoDeleteMsg)
                     .setNegativeButton(R.string.dialogNo) {_,_->}
-                    .setPositiveButton(R.string.dialogYes) {_,_->
-                        todoVM.deleteTodo(it)
-                    }
+                    .setPositiveButton(R.string.dialogYes) {_,_-> todoVM.deleteTodo(it) }
                     .show()
             }
         }
@@ -155,11 +156,29 @@ class DashboardFragment : Fragment() {
             adapter = todoAdapter
         }
         todoVM.allTodos.observe(viewLifecycleOwner) {
-            val oldSize = noteList.size
-            todoItems.clear()
-            todoAdapter.notifyItemRangeRemoved(0, oldSize)
-            todoItems.addAll(it)
-            todoAdapter.notifyItemRangeInserted(0, todoItems.size)
+            it.isAdding?.let {isAdding ->
+                if (isAdding) {
+                    if (it.newList.isEmpty()) return@let
+                    if (it.updateRangeIndex.first == it.updateRangeIndex.second) {
+                        todoItems.add(it.newList[it.updateRangeIndex.first])
+                        todoAdapter.notifyItemInserted(it.updateRangeIndex.first)
+                    } else {
+                        todoItems.addAll(
+                            it.newList.subList(
+                                it.updateRangeIndex.first, it.updateRangeIndex.second
+                            )
+                        )
+                        todoAdapter.notifyItemRangeInserted(
+                            it.updateRangeIndex.first, it.updateRangeIndex.second
+                        )
+                    }
+                } else {
+                    if (it.updateRangeIndex.first == it.updateRangeIndex.second) {
+                        todoItems.removeAt(it.updateRangeIndex.first)
+                        todoAdapter.notifyItemRemoved(it.updateRangeIndex.first)
+                    }
+                }
+            }
         }
     }
 }

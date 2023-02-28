@@ -16,11 +16,12 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.notesapp.R
 import com.example.notesapp.databinding.TodoDialogBinding
 import com.example.notesapp.model.local.entity.Todo
+import com.example.notesapp.utils.Common
 import com.example.notesapp.viewmodel.TodoViewModel
 import java.util.*
 
 class TodoDialog : DialogFragment() {
-    private val todoVM by lazy { ViewModelProvider(this)[TodoViewModel::class.java] }
+    private val todoVM by lazy { ViewModelProvider(requireActivity())[TodoViewModel::class.java] }
     private lateinit var binding: TodoDialogBinding
     private val todoItems = mutableListOf<Todo>()
 
@@ -53,6 +54,7 @@ class TodoDialog : DialogFragment() {
                         clearForm()
                     }
                     todoItemEdit.setText("")
+                    dialog?.dismiss()
                 }
             }
             cancelBtn.setOnClickListener {
@@ -78,7 +80,7 @@ class TodoDialog : DialogFragment() {
             addTextChangedListener {
                 if (it?.isBlank() != false)
                     Handler(Looper.getMainLooper())
-                        .postDelayed({ showDropDown() }, 100)
+                        .postDelayed({ if (dialog != null) showDropDown() }, 100)
             }
         }
 
@@ -92,7 +94,7 @@ class TodoDialog : DialogFragment() {
             addTextChangedListener {
                 if (it?.isBlank() != false)
                     Handler(Looper.getMainLooper())
-                        .postDelayed({ showDropDown() }, 100)
+                        .postDelayed({ if (dialog != null) showDropDown() }, 100)
             }
         }
     }

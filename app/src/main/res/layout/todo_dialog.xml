@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_gravity="center"
     android:elevation="10dp"
-    app:cardBackgroundColor="@color/white"
+    app:cardBackgroundColor="?colorSurface"
     tools:context=".view.fragments.TodoDialog">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -25,7 +25,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:gravity="center"
             android:text="@string/addTask"
-            android:textColor="@color/primary_text_color"
+            android:textColor="?colorOnPrimary"
             android:textStyle="bold"
             android:textSize="@dimen/_28dp"/>
 
@@ -43,7 +43,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/addTodoTitle"
             app:layout_constraintBottom_toTopOf="@id/prioritySpinner"
-            app:boxBackgroundColor="@color/secondary_text_color">
+            app:boxBackgroundColor="?colorBackgroundFloating">
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/todoItemEdit"
                 android:layout_width="match_parent"
@@ -52,19 +52,21 @@
                 android:gravity="center"
                 android:textSize="@dimen/_20sp" />
         </com.google.android.material.textfield.TextInputLayout>
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/prioritySpinner"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_20dp"
             android:layout_marginBottom="@dimen/_20dp"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:hint="@string/prioritySpinnerHint"
             app:layout_constraintBottom_toTopOf="@id/categorySpinner"
-            app:layout_constraintEnd_toEndOf="@id/addTodoTitle"
+            app:layout_constraintEnd_toEndOf="@+id/newTaskEditLayout"
             app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toStartOf="@id/addTodoTitle"
-            app:layout_constraintTop_toBottomOf="@id/newTaskEditLayout"
-            android:hint="@string/prioritySpinnerHint">
+            app:layout_constraintStart_toStartOf="@+id/newTaskEditLayout"
+            app:layout_constraintTop_toBottomOf="@id/newTaskEditLayout">
+
             <com.google.android.material.textfield.MaterialAutoCompleteTextView
                 style="@style/Widget.MaterialComponents.AutoCompleteTextView.OutlinedBox"
                 android:layout_width="match_parent"
@@ -75,20 +77,20 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/categorySpinner"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:hint="@string/categorySpinnerHint"
             app:layout_constraintBottom_toTopOf="@id/cancelBtn"
-            app:layout_constraintEnd_toEndOf="@id/addTodoTitle"
+            app:layout_constraintEnd_toEndOf="@+id/prioritySpinner"
             app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toStartOf="@id/addTodoTitle"
-            app:layout_constraintTop_toBottomOf="@+id/prioritySpinner"
-            android:hint="@string/categorySpinnerHint">
+            app:layout_constraintStart_toStartOf="@+id/prioritySpinner"
+            app:layout_constraintTop_toBottomOf="@+id/prioritySpinner">
+
             <com.google.android.material.textfield.MaterialAutoCompleteTextView
                 style="@style/Widget.MaterialComponents.AutoCompleteTextView.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/priorityDefault" />
+                android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton

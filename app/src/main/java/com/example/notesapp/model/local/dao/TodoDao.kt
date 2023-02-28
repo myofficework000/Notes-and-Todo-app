@@ -12,7 +12,7 @@ import com.example.notesapp.model.local.entity.Todo
 @Dao
 interface TodoDao {
     @Query("select * from $TABLE_NAME_TODO")
-    fun getAllTodo(): LiveData<List<Todo>>
+    fun getAllTodo(): List<Todo>
     @Insert
     fun addTodo(data: Todo)
     @Update
