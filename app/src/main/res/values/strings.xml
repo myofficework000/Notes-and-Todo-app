@@ -1,32 +1,36 @@
 <resources>
     <string name="app_name">NotesApp</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="newTodo">New Item</string>
+    <string name="newTodo">New Task</string>
     <string name="todoTitle">Title</string>
     <string name="todoItem">Todo Item</string>
     <string name="addNote">Add Note</string>
     <string name="addTodo">Add Todo</string>
+    <string name="deleting">Deleting…</string>
+    <string name="todoDeleteMsg">Are you sure?</string>
     <string name="updateTime">Updated At</string>
     <string name="noteTitle">Note Title</string>
+    <string name="dialogYes">Go ahead</string>
+    <string name="dialogNo">Wait</string>
 
     <string-array name="Priority">
         <item>Low</item>
         <item>Medium</item>
         <item>High</item>
     </string-array>
+    <string name="priorityDefault">Medium</string>
 
     <string-array name="Category">
         <item>Category 1</item>
         <item>Category 2</item>
         <item>Category 3</item>
     </string-array>
-    <string name="prioritySpinnerHint">Set Priority</string>
-    <string name="categorySpinnerHint">Set Category</string>
-
+    <string name="prioritySpinnerHint">Priority</string>
+    <string name="categorySpinnerHint">Category</string>
     <string name="Title">Title</string>
     <string name="notes">Enter notes here</string>
     <string name="txtBody">Your note is here</string>
     <string name="category">Category</string>
-
+    <string name="addTask">Add Task</string>
 
 </resources>

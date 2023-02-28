@@ -6,68 +6,124 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_gravity="center"
     android:elevation="10dp"
-    app:cardBackgroundColor="@color/white"
+    app:cardBackgroundColor="?colorSurface"
     tools:context=".view.fragments.TodoDialog">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/cancelIcon"
-            android:layout_width="@dimen/_40dp"
-            android:layout_height="@dimen/_40dp"
-            android:layout_margin="@dimen/_20dp"
-            android:src="@drawable/baseline_close_red_24"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/doneIcon"
-            android:layout_width="@dimen/_40dp"
-            android:layout_height="@dimen/_40dp"
-            android:layout_margin="@dimen/_20dp"
-            android:src="@drawable/baseline_done_24"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/todoItemEdit"
-            android:layout_width="@dimen/_0dp"
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/addTodoTitle"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_30dp"
-            android:layout_marginTop="@dimen/_10dp"
-            android:layout_marginEnd="@dimen/_30dp"
-            android:layout_marginBottom="@dimen/_10dp"
-            android:hint="@string/newTodo"
-            android:textSize="@dimen/_15sp"
+            android:layout_marginTop="@dimen/_20dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/newTaskEditLayout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:gravity="center"
+            android:text="@string/addTask"
+            android:textColor="?colorOnPrimary"
+            android:textStyle="bold"
+            android:textSize="@dimen/_28dp"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:counterEnabled="true"
+            app:counterMaxLength="30"
+            android:id="@+id/newTaskEditLayout"
+            android:layout_marginStart="@dimen/_40dp"
+            android:layout_marginTop="@dimen/_20dp"
+            android:layout_marginEnd="@dimen/_40dp"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cancelIcon" />
+            app:layout_constraintTop_toBottomOf="@id/addTodoTitle"
+            app:layout_constraintBottom_toTopOf="@id/prioritySpinner"
+            app:boxBackgroundColor="?colorBackgroundFloating">
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/todoItemEdit"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/newTodo"
+                android:gravity="center"
+                android:textSize="@dimen/_20sp" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.MaterialAutoCompleteTextView
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/prioritySpinner"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_20dp"
             android:layout_marginBottom="@dimen/_20dp"
             android:hint="@string/prioritySpinnerHint"
-            android:inputType="number"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/categorySpinner"
+            app:layout_constraintBottom_toTopOf="@id/categorySpinner"
+            app:layout_constraintEnd_toEndOf="@+id/newTaskEditLayout"
             app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toStartOf="@+id/todoItemEdit"
-            app:layout_constraintTop_toBottomOf="@id/todoItemEdit" />
+            app:layout_constraintStart_toStartOf="@+id/newTaskEditLayout"
+            app:layout_constraintTop_toBottomOf="@id/newTaskEditLayout">
 
-        <com.google.android.material.textfield.MaterialAutoCompleteTextView
+            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                style="@style/Widget.MaterialComponents.AutoCompleteTextView.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:text="@string/priorityDefault" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/categorySpinner"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:hint="@string/categorySpinnerHint"
-            app:layout_constraintBottom_toBottomOf="@+id/prioritySpinner"
-            app:layout_constraintEnd_toEndOf="@+id/todoItemEdit"
+            app:layout_constraintBottom_toTopOf="@id/cancelBtn"
+            app:layout_constraintEnd_toEndOf="@+id/prioritySpinner"
             app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toEndOf="@id/prioritySpinner"
-            app:layout_constraintTop_toTopOf="@+id/prioritySpinner" />
+            app:layout_constraintStart_toStartOf="@+id/prioritySpinner"
+            app:layout_constraintTop_toBottomOf="@+id/prioritySpinner">
+
+            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                style="@style/Widget.MaterialComponents.AutoCompleteTextView.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/cancelBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20dp"
+            android:layout_marginBottom="@dimen/_20dp"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/categorySpinner"
+            app:layout_constraintStart_toStartOf="@id/newTaskEditLayout"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:icon="@drawable/baseline_close_red_24"
+            android:insetLeft="0dp"
+            android:insetTop="0dp"
+            android:insetRight="0dp"
+            android:insetBottom="0dp"
+            app:iconGravity="textStart"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/addBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20dp"
+            android:layout_marginBottom="@dimen/_20dp"
+            app:layout_constraintTop_toBottomOf="@id/categorySpinner"
+            app:layout_constraintEnd_toEndOf="@id/newTaskEditLayout"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:icon="@drawable/baseline_done_24"
+            android:insetLeft="0dp"
+            android:insetTop="0dp"
+            android:insetRight="0dp"
+            android:insetBottom="0dp"
+            app:iconGravity="textStart"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
