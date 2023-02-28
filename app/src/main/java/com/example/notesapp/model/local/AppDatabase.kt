@@ -12,7 +12,7 @@ import com.example.notesapp.model.local.entity.Todo
 @Database(entities = [Note::class, Todo::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
-    abstract fun getBlogDao(): NoteDao
+    abstract fun getNoteDao(): NoteDao
     abstract fun getTodoDao(): TodoDao
 
     companion object {

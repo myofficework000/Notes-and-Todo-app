@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.notesapp.R
 import com.example.notesapp.databinding.FragmentDashboardBinding
 import com.example.notesapp.databinding.TodoItemBinding
+import com.example.notesapp.model.local.AppDatabase
 import com.example.notesapp.model.local.entity.Note
 import com.example.notesapp.model.local.entity.Todo
 import com.example.notesapp.view.adapters.NoteAdpater
@@ -22,7 +23,6 @@ class DashboardFragment : Fragment() {
     private lateinit var binding: FragmentDashboardBinding
     private lateinit var noteList: ArrayList<Note>
     private val todoVM by lazy { ViewModelProvider(requireActivity())[TodoViewModel::class.java] }
-
     private val todoItems = mutableListOf<Todo>()
     private lateinit var todoBinding: TodoItemBinding
     private val todoAdapter by lazy {
@@ -49,6 +49,8 @@ class DashboardFragment : Fragment() {
             }
         }
     }
+    
+    private lateinit var noteList: List<Note>
 
     var floatingBtnVisible = false
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -70,6 +72,7 @@ class DashboardFragment : Fragment() {
     }
 
     private fun noteInterface() {
+/*
         noteList = arrayListOf(
             Note(
                 "Programming Languages",
@@ -145,8 +148,10 @@ class DashboardFragment : Fragment() {
             )
 
         )
+*/
         binding.RVNotes.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        noteList = AppDatabase.getInstance(requireContext()).getNoteDao().getAllNotes()
         binding.RVNotes.adapter = NoteAdpater(noteList)
     }
 
