@@ -15,16 +15,16 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
 
     init {
         // It needs to be assured that dao exists at this stage. Otherwise it's worth crashing.
-        with (dao.getAllTodo()) {
-            _allTodos.value = listWithUpdateOf(this, Pair(0,this.size), true)
+        with(dao.getAllTodo()) {
+            _allTodos.value = listWithUpdateOf(this, Pair(0, this.size), true)
         }
     }
 
-    fun addTodo(data: Todo) = dao.addTodo(data).also {
-        _allTodos.value?.apply {
-            _allTodos.setValue(this.add(data))
-        }
+    fun addTodo(data: Todo) = with(data) {
+        dao.addTodo(this)
+        _allTodos.setValue(_allTodos.value?.add(this))
     }
+
     fun updateTodo(data: Todo) = dao.updateTodo(data)
     fun deleteTodo(data: Todo) = dao.deleteTodo(data).also {
         _allTodos.value?.apply {
@@ -34,7 +34,7 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
 
     data class ListWithUpdate<T>(
         val newList: List<T>,
-        val updateRangeIndex: Pair<Int,Int>,
+        val updateRangeIndex: Pair<Int, Int>,
         val isAdding: Boolean?
     ) {
         fun add(item: T) = ListWithUpdate(
@@ -49,15 +49,16 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
             true
         )
 
-        fun remove(item: T) = with (newList.indexOf(item)) {
-            if (this == -1) return ListWithUpdate(newList, Pair(-1,-1), null)
-            ListWithUpdate(newList.minus(item), Pair(this,this), false)
+        fun remove(item: T) = with(newList.indexOf(item)) {
+            if (this == -1) return ListWithUpdate(newList, Pair(-1, -1), null)
+            ListWithUpdate(newList.minus(item), Pair(this, this), false)
             // Using minus here expects the list to not have duplicate items.
         }
     }
-    fun <T>listWithUpdateOf(
+
+    fun <T> listWithUpdateOf(
         initItems: List<T> = listOf(),
-        updateRange: Pair<Int,Int> = Pair(-1,-1),
+        updateRange: Pair<Int, Int> = Pair(-1, -1),
         isAdding: Boolean? = null // true: Add, false: Remove, null: Others
     ) = ListWithUpdate(initItems, updateRange, isAdding)
 }

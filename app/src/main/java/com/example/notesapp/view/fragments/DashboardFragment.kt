@@ -21,10 +21,10 @@ import com.example.notesapp.viewmodel.TodoViewModel
 class DashboardFragment : Fragment() {
 
     private lateinit var binding: FragmentDashboardBinding
-    private lateinit var noteList: ArrayList<Note>
     private val todoVM by lazy { ViewModelProvider(requireActivity())[TodoViewModel::class.java] }
     private val todoItems = mutableListOf<Todo>()
     private lateinit var todoBinding: TodoItemBinding
+    private lateinit var noteList: List<Note>
     private val todoAdapter by lazy {
         RVAdapter(
             todoItems,
@@ -49,18 +49,11 @@ class DashboardFragment : Fragment() {
             }
         }
     }
-    
-    private lateinit var noteList: List<Note>
-
-    var floatingBtnVisible = false
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentDashboardBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -72,85 +65,8 @@ class DashboardFragment : Fragment() {
     }
 
     private fun noteInterface() {
-/*
-        noteList = arrayListOf(
-            Note(
-                "Programming Languages",
-                "Java,Python,Kotlin,JavaScript",
-                "2023 Feb 22",
-                "",
-                "14",
-                "Black",
-                "Gray",
-                "true",
-                "false",
-                0, ""
-            ),
-            Note(
-                "2023 New Year Resolution",
-                "Lose 10 lbs, Wake up at 7 am, Eat healthy",
-                "2023 Jan 1",
-                "2222",
-                "14",
-                "Black",
-                "Gray",
-                "false",
-                "true",
-                0, ""
-            ),
-            Note(
-                "Colorado Trip",
-                "Spend three nights at Apsen, Get a airbnb with hottub, Rent a rental car, Go skiing",
-                "2023 Feb 22",
-                "",
-                "14",
-                "Black",
-                "Gray",
-                "true",
-                "false",
-                0, ""
-            ),
-            Note(
-                "Programming Languages",
-                "Java,Python,Kotlin,JavaScript",
-                "2023 Feb 22",
-                "",
-                "14",
-                "Black",
-                "Gray",
-                "true",
-                "false",
-                0, ""
-            ),
-            Note(
-                "2023 New Year Resolution",
-                "Lose 10 lbs, Wake up at 7 am, Eat healthy",
-                "2023 Jan 1",
-                "2222",
-                "14",
-                "Black",
-                "Gray",
-                "false",
-                "true",
-                0, ""
-            ),
-            Note(
-                "Colorado Trip",
-                "Spend three nights at Apsen, Get a airbnb with hottub, Rent a rental car, Go skiing",
-                "2023 Feb 22",
-                "",
-                "14",
-                "Black",
-                "Gray",
-                "true",
-                "false",
-                0, ""
-            )
-
-        )
-*/
         binding.RVNotes.layoutManager =
-            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, true)
         noteList = AppDatabase.getInstance(requireContext()).getNoteDao().getAllNotes()
         binding.RVNotes.adapter = NoteAdpater(noteList)
     }
@@ -160,7 +76,7 @@ class DashboardFragment : Fragment() {
             layoutManager = LinearLayoutManager(context)
             adapter = todoAdapter
         }
-        todoVM.allTodos.observe(viewLifecycleOwner) {
+        todoVM.allTodos.observe(this.viewLifecycleOwner) {
             it.isAdding?.let {isAdding ->
                 if (isAdding) {
                     if (it.newList.isEmpty()) return@let

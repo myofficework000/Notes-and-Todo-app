@@ -17,9 +17,10 @@ class RVAdapter<T>(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH = itemBindingInflater(
         LayoutInflater.from(parent.context), parent, false, ::createVH
     )
-    override fun getItemCount(): Int = items.count()
+    override fun getItemCount(): Int = items.size
     override fun onBindViewHolder(holder: VH, position: Int) = holder.bind(items[position], this)
-    inner class VH(view: View): RecyclerView.ViewHolder(view) { fun bind(
+    inner class VH(view: View): RecyclerView.ViewHolder(view) {
+        fun bind(
         item: T,
         adapter: RVAdapter<T>
     ) = bindFunc(item, adapter) }
