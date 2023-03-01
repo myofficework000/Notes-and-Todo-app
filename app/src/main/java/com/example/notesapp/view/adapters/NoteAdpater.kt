@@ -1,5 +1,6 @@
 package com.example.notesapp.view.adapters
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,10 +23,14 @@ class NoteAdpater(private val noteList: List<Note>): RecyclerView.Adapter<NoteAd
 
     override fun onBindViewHolder(holder: NotesViewHolder, position: Int) {
         holder.bind(noteList[position])
+        val data = Bundle()
+        data.putParcelable ("note", noteList[position])
+        val notesFragment = NotesFragment()
+        notesFragment.arguments = data
         holder.itemView.setOnClickListener (object : View.OnClickListener{
             override fun onClick(v: View?){
                 val activity = v!!.context as AppCompatActivity
-                activity.supportFragmentManager.beginTransaction().replace(R.id.dashboardFragment,NotesFragment()).commit()
+                activity.supportFragmentManager.beginTransaction().replace(R.id.dashboardFragment,notesFragment).commit()
             }
         })
     }
@@ -49,7 +54,6 @@ class NoteAdpater(private val noteList: List<Note>): RecyclerView.Adapter<NoteAd
                     }
                 }
             }
-
         }
     }
 }
