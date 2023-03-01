@@ -25,8 +25,6 @@ class DashboardFragment : Fragment() {
     private val notesVM by lazy { ViewModelProvider(requireActivity())[NotesViewModel::class.java] }
     private val todoItems = mutableListOf<Todo>()
     private lateinit var todoBinding: TodoItemBinding
-
-    //    private lateinit var noteList: List<Note>
     private val todoAdapter by lazy {
         RVAdapter(
             todoItems,
