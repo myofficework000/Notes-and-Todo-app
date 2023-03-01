@@ -152,7 +152,7 @@ class NotesFragment : Fragment() {
         } else {
             Toast.makeText(requireContext(), "Successfully deleted", Toast.LENGTH_SHORT).show()
             noteDao.delete(note)
-            activity?.supportFragmentManager?.popBackStackImmediate()
+            activity?.supportFragmentManager?.popBackStack()
         }
     }
 
@@ -167,7 +167,7 @@ class NotesFragment : Fragment() {
                 noteDao.update(note)
             }
             Toast.makeText(requireContext(), "Saved successfully", Toast.LENGTH_SHORT).show()
-            activity?.supportFragmentManager?.popBackStackImmediate()
+            activity?.supportFragmentManager?.popBackStack()
         } else {
             Toast.makeText(requireContext(), "Nothing to save", Toast.LENGTH_SHORT).show()
         }

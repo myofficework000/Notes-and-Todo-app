@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -11,20 +12,21 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.notesapp.R
 import com.example.notesapp.databinding.FragmentDashboardBinding
 import com.example.notesapp.databinding.TodoItemBinding
-import com.example.notesapp.model.local.AppDatabase
-import com.example.notesapp.model.local.entity.Note
 import com.example.notesapp.model.local.entity.Todo
-import com.example.notesapp.view.adapters.NoteAdpater
+import com.example.notesapp.view.adapters.NoteAdapter
 import com.example.notesapp.view.adapters.RVAdapter
+import com.example.notesapp.viewmodel.NotesViewModel
 import com.example.notesapp.viewmodel.TodoViewModel
 
 class DashboardFragment : Fragment() {
 
     private lateinit var binding: FragmentDashboardBinding
     private val todoVM by lazy { ViewModelProvider(requireActivity())[TodoViewModel::class.java] }
+    private val notesVM by lazy { ViewModelProvider(requireActivity())[NotesViewModel::class.java] }
     private val todoItems = mutableListOf<Todo>()
     private lateinit var todoBinding: TodoItemBinding
-    private lateinit var noteList: List<Note>
+
+    //    private lateinit var noteList: List<Note>
     private val todoAdapter by lazy {
         RVAdapter(
             todoItems,
@@ -35,16 +37,16 @@ class DashboardFragment : Fragment() {
             }
         ) { it, _ ->
             todoBinding.todoItem.setText(it.title)
-            todoBinding.noteCheckBox.apply{
+            todoBinding.noteCheckBox.apply {
                 isChecked = it.isDone
-                setOnClickListener { _-> todoVM.updateTodo( it.copy(isDone = isChecked) ) }
+                setOnClickListener { _ -> todoVM.updateTodo(it.copy(isDone = isChecked)) }
             }
-            todoBinding.deletetodo.setOnClickListener {_ ->
+            todoBinding.deletetodo.setOnClickListener { _ ->
                 AlertDialog.Builder(requireContext())
                     .setTitle(R.string.deleting)
                     .setMessage(R.string.todoDeleteMsg)
-                    .setNegativeButton(R.string.dialogNo) {_,_->}
-                    .setPositiveButton(R.string.dialogYes) {_,_-> todoVM.deleteTodo(it) }
+                    .setNegativeButton(R.string.dialogNo) { _, _ -> }
+                    .setPositiveButton(R.string.dialogYes) { _, _ -> todoVM.deleteTodo(it) }
                     .show()
             }
         }
@@ -66,9 +68,14 @@ class DashboardFragment : Fragment() {
 
     private fun noteInterface() {
         binding.RVNotes.layoutManager =
-            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, true)
-        noteList = AppDatabase.getInstance(requireContext()).getNoteDao().getAllNotes()
-        binding.RVNotes.adapter = NoteAdpater(noteList)
+            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        notesVM.allNotes.observe(this.viewLifecycleOwner) {
+
+            it?.let {
+                Toast.makeText(requireContext(), it.size.toString(),Toast.LENGTH_SHORT).show()
+                binding.RVNotes.adapter = NoteAdapter(it)
+            }
+        }
     }
 
     private fun initTodoList() {
@@ -77,7 +84,7 @@ class DashboardFragment : Fragment() {
             adapter = todoAdapter
         }
         todoVM.allTodos.observe(this.viewLifecycleOwner) {
-            it.isAdding?.let {isAdding ->
+            it.isAdding?.let { isAdding ->
                 if (isAdding) {
                     if (it.newList.isEmpty()) return@let
                     if (it.updateRangeIndex.first == it.updateRangeIndex.second) {
