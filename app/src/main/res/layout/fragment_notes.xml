@@ -65,6 +65,31 @@
             android:backgroundTint="@android:color/transparent"
             android:src="@drawable/baseline_delete_24"
             app:tint="@color/white" />
+        <androidx.appcompat.widget.AppCompatEditText
+            android:layout_width="@dimen/_40dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/inputFontSize"
+            android:background="@color/white"
+            android:layout_margin="2dp"
+            android:hint="FS"
+            />
+        <androidx.appcompat.widget.AppCompatEditText
+            android:layout_width="@dimen/_40dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/inputTextColor"
+            android:background="@color/white"
+            android:layout_margin="2dp"
+            android:hint="TC"
+            />
+        <androidx.appcompat.widget.AppCompatEditText
+            android:layout_width="@dimen/_40dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/inputBackgroundColor"
+            android:background="@color/white"
+            android:layout_margin="2dp"
+            android:hint="BG"
+            />
+
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"

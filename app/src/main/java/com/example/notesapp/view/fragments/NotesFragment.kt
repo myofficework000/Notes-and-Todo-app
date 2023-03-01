@@ -41,7 +41,8 @@ class NotesFragment : Fragment() {
     ): View? {
         binding = FragmentNotesBinding.inflate(inflater, container, false)
         initDatabase()
-        initData()
+        val noteParam = arguments?.getParcelable<Note>("note")
+        initData(noteParam)
         initViews()
         return binding.root
     }
@@ -51,53 +52,56 @@ class NotesFragment : Fragment() {
         noteDao = db.getNoteDao()
     }
 
-    private fun initData() {
-        initWithData() //in case of "Add note"
-//        initWithData(Note(
-//            "Title - in case of title",
-//            "",
-//            "",
-//            "",
-//            "",
-//            "",
-//            "",
-//            "",
-//            0,
-//            ""
-//        ))
+    private fun createEmptyEditingNote() : Note {
+        return Note(
+            "",
+            "",
+            Calendar.getInstance().time.toString(),
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            0,
+            ""
+        )
     }
 
-    private fun initWithData(data: Note? = null) {
-        if(data != null) {
-            note = data
+    private fun initData(noteParam: Note?) {
+        if(noteParam != null) {
+            note = noteParam
+            editingNote = noteParam.copy()
         }
         else {
-            note = Note(
-                "",
-                "",
-                Calendar.getInstance().time.toString(),
-                "OK",
-                "14",
-                "red",
-                "false",
-                "false",
-                "",
-                0,
-                ""
-            )
+            note = createEmptyEditingNote()
+            editingNote = createEmptyEditingNote()
         }
-        editingNote = note.copy()
     }
-
     private fun initViews() {
         binding.apply {
-            inputTitle.setText(note.title)
+            btnClose.setOnClickListener {
+                activity?.supportFragmentManager?.popBackStackImmediate()
+            }
+            inputTitle.setText(editingNote.title)
             inputTitle.doAfterTextChanged {
                 editingNote.title = inputTitle.text.toString()
             }
-            inputBody.setText(note.body)
+            inputBody.setText(editingNote.body)
             inputBody.doAfterTextChanged {
                 editingNote.body = inputBody.text.toString()
+            }
+            inputFontSize.setText(editingNote.bodyFontSize)
+            inputFontSize.doAfterTextChanged {
+                editingNote.bodyFontSize = inputFontSize.text.toString()
+            }
+            inputTextColor.setText(editingNote.textColor)
+            inputTextColor.doAfterTextChanged {
+                editingNote.textColor = inputTextColor.text.toString()
+            }
+            inputBackgroundColor.setText(editingNote.bgColor)
+            inputBackgroundColor.doAfterTextChanged {
+                editingNote.bgColor = inputBackgroundColor.text.toString()
             }
             btnDelete.setOnClickListener {
                 deleteNoteClick()
@@ -143,12 +147,12 @@ class NotesFragment : Fragment() {
     }
 
     private fun deleteNoteClick() {
-        if (note.title.isEmpty()) {
+        if (note.index == 0) {
             Toast.makeText(requireContext(), "Nothing to delete", Toast.LENGTH_SHORT).show()
         } else {
-            Toast.makeText(requireContext(), "Deleted successfully", Toast.LENGTH_SHORT).show()
-            initData()
-            initViews()
+            Toast.makeText(requireContext(), "Successfully deleted", Toast.LENGTH_SHORT).show()
+            noteDao.delete(note)
+            activity?.supportFragmentManager?.popBackStackImmediate()
         }
     }
 
@@ -163,8 +167,10 @@ class NotesFragment : Fragment() {
                 noteDao.update(note)
             }
             Toast.makeText(requireContext(), "Saved successfully", Toast.LENGTH_SHORT).show()
+            activity?.supportFragmentManager?.popBackStackImmediate()
         } else {
             Toast.makeText(requireContext(), "Nothing to save", Toast.LENGTH_SHORT).show()
         }
     }
+
 }
