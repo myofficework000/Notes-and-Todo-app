@@ -13,6 +13,7 @@
     <dimen name="_30dp">30dp</dimen>
     <dimen name="_38dp">38dp</dimen>
     <dimen name="_40dp">40dp</dimen>
+    <dimen name="_280dp">280dp</dimen>
 
     <dimen name="_13sp">13sp</dimen>
     <dimen name="_15sp">15sp</dimen>

@@ -38,5 +38,6 @@
     <string name="close">Close</string>
     <string name="mark_as_incomplete">Mark As Incomplete</string>
     <string name="detail_priority">Priority: %s</string>
+    <string name="todo_title_empty_error">Title cannot be empty</string>
 
 </resources>

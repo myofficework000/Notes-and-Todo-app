@@ -28,6 +28,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <View
+            android:id="@+id/dropdownAnchor"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintEnd_toEndOf="@+id/categorySpinner"
+            app:layout_constraintStart_toStartOf="@+id/categorySpinner"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/newTaskEditLayout"
             android:layout_width="0dp"
@@ -91,6 +99,8 @@
                 style="@style/Widget.MaterialComponents.AutoCompleteTextView.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:dropDownAnchor="@id/dropdownAnchor"
+                android:dropDownHeight="@dimen/_280dp"
                 android:inputType="number"
                 android:text="@string/priorityDefault" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -110,7 +120,9 @@
             <com.google.android.material.textfield.MaterialAutoCompleteTextView
                 style="@style/Widget.MaterialComponents.AutoCompleteTextView.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:dropDownAnchor="@id/dropdownAnchor"
+                android:dropDownHeight="@dimen/_280dp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton
@@ -145,5 +157,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/newTaskEditLayout"
             app:layout_constraintTop_toBottomOf="@id/categorySpinner" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

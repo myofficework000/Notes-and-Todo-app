@@ -55,12 +55,16 @@ class TodoDialog : DialogFragment() {
                     }
                     todoItemEdit.setText("")
                     dialog?.dismiss()
+                } else {
+                    binding.newTaskEditLayout.error = getString(R.string.todo_title_empty_error)
                 }
             }
             cancelBtn.setOnClickListener {
                 dialog?.dismiss()
             }
-            newTaskEditLayout.let{}
+            todoItemEdit.addTextChangedListener {
+                binding.newTaskEditLayout.error = null
+            }
         }
     }
     private fun addItemsToSpinner() {
@@ -80,6 +84,7 @@ class TodoDialog : DialogFragment() {
                     ) setText(getString(R.string.priorityDefault))
                 }
             }
+            setOnClickListener {  showDropDown() }
             addTextChangedListener {
                 if (it?.isBlank() != false)
                     handler.postDelayed({ if (dialog != null) showDropDown() }, 100)
@@ -93,6 +98,7 @@ class TodoDialog : DialogFragment() {
                 resources.getStringArray(R.array.Category)
             ))
             setOnFocusChangeListener { _, b -> if (b) showDropDown() else dismissDropDown() }
+            setOnClickListener { showDropDown() }
             addTextChangedListener {
                 if (it?.isBlank() != false)
                     handler.postDelayed({ if (dialog != null) showDropDown() }, 100)
