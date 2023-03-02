@@ -56,6 +56,55 @@
             app:tint="@color/white" />
 
         <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btnLink"
+            android:backgroundTint="@android:color/transparent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="@dimen/_4dp"
+            android:padding="@dimen/_4dp"
+            android:src="@drawable/baseline_link_24"
+            app:tint="@color/white" />
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btnTextColor"
+            android:backgroundTint="@android:color/transparent"
+            android:layout_width="@dimen/_30dp"
+            android:layout_height="@dimen/_30dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="@dimen/_4dp"
+            android:padding="@dimen/_4dp"
+            android:src="@drawable/baseline_format_color_text_24"
+            app:tint="@color/white" />
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btnBackgroundColor"
+            android:backgroundTint="@android:color/transparent"
+            android:layout_width="@dimen/_30dp"
+            android:layout_height="@dimen/_30dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="@dimen/_4dp"
+            android:padding="@dimen/_4dp"
+            android:src="@drawable/baseline_format_color_fill_24"
+            app:tint="@color/white" />
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btnFontSize"
+            android:backgroundTint="@android:color/transparent"
+            android:layout_width="@dimen/_30dp"
+            android:layout_height="@dimen/_30dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="@dimen/_4dp"
+            android:padding="@dimen/_4dp"
+            android:src="@drawable/baseline_text_fields_24"
+            app:tint="@color/white" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/btnDelete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -65,31 +114,6 @@
             android:backgroundTint="@android:color/transparent"
             android:src="@drawable/baseline_delete_24"
             app:tint="@color/white" />
-        <androidx.appcompat.widget.AppCompatEditText
-            android:layout_width="@dimen/_40dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/inputFontSize"
-            android:background="@color/white"
-            android:layout_margin="2dp"
-            android:hint="FS"
-            />
-        <androidx.appcompat.widget.AppCompatEditText
-            android:layout_width="@dimen/_40dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/inputTextColor"
-            android:background="@color/white"
-            android:layout_margin="2dp"
-            android:hint="TC"
-            />
-        <androidx.appcompat.widget.AppCompatEditText
-            android:layout_width="@dimen/_40dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/inputBackgroundColor"
-            android:background="@color/white"
-            android:layout_margin="2dp"
-            android:hint="BG"
-            />
-
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -117,5 +141,6 @@
         app:layout_constraintTop_toBottomOf="@id/inputTitle"
         app:layout_constraintBottom_toBottomOf="parent"
         android:hint="Note body"
+        android:gravity="top"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>
