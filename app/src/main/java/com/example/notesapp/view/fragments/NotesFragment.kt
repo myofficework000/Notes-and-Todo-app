@@ -25,6 +25,7 @@ import com.example.notesapp.model.Constants.STRONG_COLORS
 import com.example.notesapp.model.local.AppDatabase
 import com.example.notesapp.model.local.dao.NoteDao
 import com.example.notesapp.model.local.entity.Note
+import com.example.notesapp.utils.Common.stringInt
 import java.util.*
 
 
@@ -66,7 +67,7 @@ class NotesFragment : Fragment() {
         noteDao = db.getNoteDao()
     }
 
-    private fun createEmptyEditingNote() : Note {
+    private fun createEmptyEditingNote(): Note {
         return Note(
             "",
             "",
@@ -83,42 +84,32 @@ class NotesFragment : Fragment() {
     }
 
     private fun initData(noteParam: Note?) {
-        if(noteParam != null) {
+        if (noteParam != null) {
             note = noteParam
             editingNote = noteParam.copy()
-        }
-        else {
+        } else {
             note = createEmptyEditingNote()
             editingNote = createEmptyEditingNote()
         }
-    }
-
-    private fun stringInt(str: String?, isColorNo:Boolean = false): Int {
-        if(str == null) return 0
-        if(str.isEmpty()) return 0
-        var intVal = str.toInt()
-        if(isColorNo) {
-            if(intVal > SOFT_COLORS.size-1) {
-                intVal = SOFT_COLORS.size-1
-            }
-        }
-        return intVal
     }
 
     private fun updateUIBackgroundColor(colorNo: Int) {
         binding.layoutToolbar.setBackgroundColor(Color.parseColor(STRONG_COLORS[colorNo]))
         binding.notesFragment.setBackgroundColor(Color.parseColor(SOFT_COLORS[colorNo]))
     }
+
     private fun updateUITextColor(colorNo: Int) {
         binding.inputTitle.setTextColor(Color.parseColor(STRONG_COLORS[colorNo]))
         binding.inputBody.setTextColor(Color.parseColor(STRONG_COLORS[colorNo]))
     }
+
     private fun updateUIFontSize(fsNo: Int) {
-        var fontSize = fsNo;
-        if(fontSize > FONT_SIZES.size-1) fontSize = FONT_SIZES.size-1
+        var fontSize = fsNo
+        if (fontSize > FONT_SIZES.size - 1) fontSize = FONT_SIZES.size - 1
         binding.inputTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, FONT_SIZES[fontSize].toFloat())
         binding.inputBody.setTextSize(TypedValue.COMPLEX_UNIT_PX, FONT_SIZES[fontSize].toFloat())
     }
+
     private fun initViews() {
         binding.apply {
             updateUIBackgroundColor(stringInt(editingNote.bgColor, true))
@@ -131,22 +122,24 @@ class NotesFragment : Fragment() {
                     setView(fsDialogBinding.root)
                     setCancelable(false)
                 }
-                fsDialogBinding.spinnerFontSize.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, FONT_SIZES)
+                fsDialogBinding.spinnerFontSize.adapter =
+                    ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, FONT_SIZES)
                 fsDialogBinding.spinnerFontSize.setSelection(stringInt(editingNote.bodyFontSize))
-                fsDialogBinding.spinnerFontSize.setOnItemSelectedListener(object : OnItemSelectedListener {
-                    override fun onItemSelected(
-                        parentView: AdapterView<*>?,
-                        selectedItemView: View,
-                        position: Int,
-                        id: Long
-                    ) {
-                        editingNote.bodyFontSize = position.toString()
-                        updateUIFontSize(stringInt(editingNote.bodyFontSize))
-                    }
+                fsDialogBinding.spinnerFontSize.onItemSelectedListener =
+                    object : OnItemSelectedListener {
+                        override fun onItemSelected(
+                            parentView: AdapterView<*>?,
+                            selectedItemView: View,
+                            position: Int,
+                            id: Long
+                        ) {
+                            editingNote.bodyFontSize = position.toString()
+                            updateUIFontSize(stringInt(editingNote.bodyFontSize))
+                        }
 
-                    override fun onNothingSelected(parentView: AdapterView<*>?) {
+                        override fun onNothingSelected(parentView: AdapterView<*>?) {
+                        }
                     }
-                })
                 val dialog = builder.create()
                 dialog.window?.setGravity(Gravity.CENTER)
                 fsDialogBinding.apply {
@@ -259,34 +252,34 @@ class NotesFragment : Fragment() {
                 saveNoteClick()
             }
 
-            val iStarred:Boolean = editingNote.isStarred.toBoolean()
-            if(iStarred) {
+            val iStarred: Boolean = editingNote.isStarred.toBoolean()
+            if (iStarred) {
                 btnStarred.setImageResource(R.drawable.baseline_star_24)
             } else {
                 btnStarred.setImageResource(R.drawable.baseline_star_border_24)
             }
             btnStarred.setOnClickListener {
-                var starred:Boolean = editingNote.isStarred.toBoolean()
+                var starred: Boolean = editingNote.isStarred.toBoolean()
                 starred = !starred
                 editingNote.isStarred = starred.toString()
-                if(starred) {
+                if (starred) {
                     btnStarred.setImageResource(R.drawable.baseline_star_24)
                 } else {
                     btnStarred.setImageResource(R.drawable.baseline_star_border_24)
                 }
             }
 
-            val iLocked:Boolean = editingNote.isLocked.toBoolean()
-            if(iLocked) {
+            val iLocked: Boolean = editingNote.isLocked.toBoolean()
+            if (iLocked) {
                 btnLocked.setImageResource(R.drawable.baseline_lock_24)
             } else {
                 btnLocked.setImageResource(R.drawable.baseline_lock_open_24)
             }
             btnLocked.setOnClickListener {
-                var locked:Boolean = editingNote.isLocked.toBoolean()
+                var locked: Boolean = editingNote.isLocked.toBoolean()
                 locked = !locked
                 editingNote.isLocked = locked.toString()
-                if(locked) {
+                if (locked) {
                     btnLocked.setImageResource(R.drawable.baseline_lock_24)
                 } else {
                     btnLocked.setImageResource(R.drawable.baseline_lock_open_24)
@@ -307,11 +300,10 @@ class NotesFragment : Fragment() {
 
     private fun saveNoteClick() {
         if (editingNote != note) {
-            if(note.index <= 0) {
+            if (note.index <= 0) {
                 note = editingNote.copy()
                 noteDao.insert(note)
-            }
-            else {
+            } else {
                 note = editingNote.copy()
                 noteDao.update(note)
             }

@@ -13,7 +13,7 @@ object Constants {
         "#663399",
         "#2E8B57",
         "#008080",
-        "#00CED1"
+        "#FFFFFF"
     )
     val SOFT_COLORS = arrayOf(
         "#DCDCDC",

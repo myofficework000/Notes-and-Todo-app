@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mainCard"
     android:layout_width="200dp"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp"
+    android:layout_margin="@dimen/_5dp"
     app:cardBackgroundColor="@android:color/darker_gray"
-    app:cardCornerRadius="5dp"
+    app:cardCornerRadius="@dimen/_5dp"
     app:cardElevation="@dimen/_10dp">
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="300dp" >
+        android:layout_height="300dp">
 
         <LinearLayout
             android:id="@+id/layoutToolbar"
@@ -50,17 +51,17 @@
 
         <TextView
             android:id="@+id/txtNoteTitle"
-            android:layout_below="@+id/layoutToolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif"
+            android:layout_below="@+id/layoutToolbar"
             android:layout_margin="@dimen/_4dp"
+            android:fontFamily="sans-serif"
             android:maxLines="1"
             android:padding="@dimen/_4dp"
             android:text="@string/noteTitle"
             android:textColor="@color/white"
-            android:textStyle="bold"
-            android:textSize="@dimen/_20sp" />
+            android:textSize="@dimen/_20sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/txtNoteBody"

@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -57,8 +56,8 @@ class DashboardFragment : Fragment() {
                     .show()
             }
 
-            binding.root.setOnClickListener {_->
-                TodoDetailFragment(it){ checked ->
+            binding.root.setOnClickListener { _ ->
+                TodoDetailFragment(it) { checked ->
                     todoVM.updateTodo(it.copy(isDone = checked))
                     strikeText(binding.todoItem, checked)
                     binding.noteCheckBox.isChecked = checked
@@ -87,7 +86,6 @@ class DashboardFragment : Fragment() {
         notesVM.allNotes.observe(this.viewLifecycleOwner) {
 
             it?.let {
-                Toast.makeText(requireContext(), it.size.toString(),Toast.LENGTH_SHORT).show()
                 binding.RVNotes.adapter = NoteAdapter(it)
             }
         }

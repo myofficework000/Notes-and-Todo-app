@@ -9,6 +9,14 @@
     android:id="@+id/notesFragment"
     tools:context=".view.fragments.NotesFragment">
 
+    <ScrollView
+        android:fillViewport="true"
+        android:id="@+id/layoutToolbarScroll"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
     <LinearLayout
         android:id="@+id/layoutToolbar"
         android:layout_width="match_parent"
@@ -34,9 +42,6 @@
             android:backgroundTint="@android:color/transparent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
             android:layout_margin="@dimen/_4dp"
             android:padding="@dimen/_4dp"
             android:src="@drawable/baseline_lock_open_24"
@@ -47,9 +52,6 @@
             android:backgroundTint="@android:color/transparent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
             android:layout_margin="@dimen/_4dp"
             android:padding="@dimen/_4dp"
             android:src="@drawable/baseline_star_24"
@@ -60,9 +62,6 @@
             android:backgroundTint="@android:color/transparent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
             android:layout_margin="@dimen/_4dp"
             android:padding="@dimen/_4dp"
             android:src="@drawable/baseline_link_24"
@@ -72,9 +71,6 @@
             android:backgroundTint="@android:color/transparent"
             android:layout_width="@dimen/_30dp"
             android:layout_height="@dimen/_30dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
             android:layout_margin="@dimen/_4dp"
             android:padding="@dimen/_4dp"
             android:src="@drawable/baseline_format_color_text_24"
@@ -84,9 +80,6 @@
             android:backgroundTint="@android:color/transparent"
             android:layout_width="@dimen/_30dp"
             android:layout_height="@dimen/_30dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
             android:layout_margin="@dimen/_4dp"
             android:padding="@dimen/_4dp"
             android:src="@drawable/baseline_format_color_fill_24"
@@ -96,9 +89,6 @@
             android:backgroundTint="@android:color/transparent"
             android:layout_width="@dimen/_30dp"
             android:layout_height="@dimen/_30dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
             android:layout_margin="@dimen/_4dp"
             android:padding="@dimen/_4dp"
             android:src="@drawable/baseline_text_fields_24"
@@ -108,7 +98,6 @@
             android:id="@+id/btnDelete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="@+id/txtNoteTitle"
             android:layout_margin="@dimen/_4dp"
             android:padding="@dimen/_4dp"
             android:backgroundTint="@android:color/transparent"
@@ -127,12 +116,13 @@
             android:src="@drawable/baseline_save_24"
             />
     </LinearLayout>
+    </ScrollView>
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/inputTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/layoutToolbar"
-        android:hint="Title"
+        app:layout_constraintTop_toBottomOf="@id/layoutToolbarScroll"
+        android:hint="@string/Title"
         />
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/inputBody"
@@ -140,7 +130,8 @@
         android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@id/inputTitle"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:hint="Note body"
+        android:hint="@string/txtBody"
         android:gravity="top"
         />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

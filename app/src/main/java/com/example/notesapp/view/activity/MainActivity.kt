@@ -17,7 +17,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initView()
-
     }
     private fun initView() {
         binding.apply {
@@ -30,19 +29,19 @@ class MainActivity : AppCompatActivity() {
             }
             todoBtn.setOnClickListener {
                 //fragmentManger.beginTransaction().replace(R.id.dashboardFragment, TodoFragment()).commit()
-
-                TodoDialog().show(supportFragmentManager,"TodoDialog")
                 hideFloatingButton()
+                TodoDialog().show(supportFragmentManager,"TodoDialog")
             }
             noteBtn.setOnClickListener {
+                hideFloatingButton()
                 fragmentManger.beginTransaction()
                     .add(R.id.dashboardFragment, NotesFragment())
                     .addToBackStack(TAG_NOTES)
                     .commit()
-                hideFloatingButton()
             }
         }
     }
+
     private fun expandFloatingButton(){
         binding.apply{
             noteBtn.show()
