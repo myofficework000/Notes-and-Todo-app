@@ -25,7 +25,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:gravity="center"
             android:text="@string/addTask"
-            android:textColor="?colorOnPrimary"
+            android:textColor="?colorOnSecondary"
             android:textStyle="bold"
             android:textSize="@dimen/_28dp"/>
 

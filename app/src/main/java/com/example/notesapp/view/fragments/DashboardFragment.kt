@@ -1,5 +1,6 @@
 package com.example.notesapp.view.fragments
 
+import android.graphics.Paint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -34,10 +35,21 @@ class DashboardFragment : Fragment() {
                 }.run { vh(root) }
             }
         ) { it, _ ->
-            todoBinding.todoItem.setText(it.title)
+            todoBinding.todoItem.text = it.title
+
             todoBinding.noteCheckBox.apply {
                 isChecked = it.isDone
-                setOnClickListener { _ -> todoVM.updateTodo(it.copy(isDone = isChecked)) }
+                setOnClickListener { _ ->
+                    todoVM.updateTodo(it.copy(isDone = isChecked))
+                    todoBinding.todoItem.apply {
+                        if(isChecked){
+                            paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
+                        }else{
+                            paintFlags = 0
+                        }
+                    }
+
+                }
             }
             todoBinding.deletetodo.setOnClickListener { _ ->
                 AlertDialog.Builder(requireContext())
