@@ -27,7 +27,7 @@ class TodoDetailFragment(
         todoDetailDescription.text = data.description
         todoDetailIsDone.isChecked = data.isDone
         todoDetailIsDone.text = getString(
-            if (data.isDone) R.string.mark_as_complete else R.string.mark_as_incomplete
+            if (data.isDone) R.string.mark_as_incomplete else R.string.mark_as_complete
         )
         todoDetailIsDone.setOnCheckedChangeListener {_, checked ->
             editTodoDone(checked)

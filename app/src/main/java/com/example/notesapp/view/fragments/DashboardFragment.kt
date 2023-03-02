@@ -32,7 +32,8 @@ class DashboardFragment : Fragment() {
             { inflater, container, attach, vh ->
                 vh(TodoItemBinding.inflate(inflater, container, attach))
             }
-        ) { it, b, _ ->
+        ) { data, b, _ ->
+            var it = data
             val binding = b as TodoItemBinding
             binding.todoItem.apply {
                 text = it.title
@@ -43,6 +44,7 @@ class DashboardFragment : Fragment() {
                 isChecked = it.isDone
                 setOnCheckedChangeListener { _, checked ->
                     todoVM.updateTodo(it.copy(isDone = checked))
+                    it = it.copy(isDone = checked)
                     strikeText(binding.todoItem, checked)
                 }
             }
