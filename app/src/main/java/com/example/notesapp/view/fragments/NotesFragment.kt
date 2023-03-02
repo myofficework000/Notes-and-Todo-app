@@ -1,18 +1,32 @@
 package com.example.notesapp.view.fragments
 
+import android.app.AlertDialog
+import android.graphics.Color
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.TypedValue
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.AdapterView.OnItemSelectedListener
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.core.widget.doAfterTextChanged
+import androidx.fragment.app.Fragment
 import com.example.notesapp.R
+import com.example.notesapp.databinding.ColorDialogBinding
 import com.example.notesapp.databinding.FragmentNotesBinding
+import com.example.notesapp.databinding.FsDialogBinding
+import com.example.notesapp.databinding.LinkDialogBinding
+import com.example.notesapp.model.Constants.FONT_SIZES
+import com.example.notesapp.model.Constants.SOFT_COLORS
+import com.example.notesapp.model.Constants.STRONG_COLORS
 import com.example.notesapp.model.local.AppDatabase
 import com.example.notesapp.model.local.dao.NoteDao
 import com.example.notesapp.model.local.entity.Note
-import java.util.Calendar
+import java.util.*
+
 
 fun Note.copy(): Note = Note(
     this.title,
@@ -78,8 +92,155 @@ class NotesFragment : Fragment() {
             editingNote = createEmptyEditingNote()
         }
     }
+
+    private fun stringInt(str: String?, isColorNo:Boolean = false): Int {
+        if(str == null) return 0
+        if(str.isEmpty()) return 0
+        var intVal = str.toInt()
+        if(isColorNo) {
+            if(intVal > SOFT_COLORS.size-1) {
+                intVal = SOFT_COLORS.size-1
+            }
+        }
+        return intVal
+    }
+
+    private fun updateUIBackgroundColor(colorNo: Int) {
+        binding.layoutToolbar.setBackgroundColor(Color.parseColor(STRONG_COLORS[colorNo]))
+        binding.notesFragment.setBackgroundColor(Color.parseColor(SOFT_COLORS[colorNo]))
+    }
+    private fun updateUITextColor(colorNo: Int) {
+        binding.inputTitle.setTextColor(Color.parseColor(STRONG_COLORS[colorNo]))
+        binding.inputBody.setTextColor(Color.parseColor(STRONG_COLORS[colorNo]))
+    }
+    private fun updateUIFontSize(fsNo: Int) {
+        var fontSize = fsNo;
+        if(fontSize > FONT_SIZES.size-1) fontSize = FONT_SIZES.size-1
+        binding.inputTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, FONT_SIZES[fontSize].toFloat())
+        binding.inputBody.setTextSize(TypedValue.COMPLEX_UNIT_PX, FONT_SIZES[fontSize].toFloat())
+    }
     private fun initViews() {
         binding.apply {
+            updateUIBackgroundColor(stringInt(editingNote.bgColor, true))
+            updateUITextColor(stringInt(editingNote.textColor, true))
+            updateUIFontSize(stringInt(editingNote.bodyFontSize))
+            btnFontSize.setOnClickListener {
+                val fsDialogBinding: FsDialogBinding = FsDialogBinding.inflate(layoutInflater)
+
+                val builder = AlertDialog.Builder(requireContext()).apply {
+                    setView(fsDialogBinding.root)
+                    setCancelable(false)
+                }
+                fsDialogBinding.spinnerFontSize.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, FONT_SIZES)
+                fsDialogBinding.spinnerFontSize.setSelection(stringInt(editingNote.bodyFontSize))
+                fsDialogBinding.spinnerFontSize.setOnItemSelectedListener(object : OnItemSelectedListener {
+                    override fun onItemSelected(
+                        parentView: AdapterView<*>?,
+                        selectedItemView: View,
+                        position: Int,
+                        id: Long
+                    ) {
+                        editingNote.bodyFontSize = position.toString()
+                        updateUIFontSize(stringInt(editingNote.bodyFontSize))
+                    }
+
+                    override fun onNothingSelected(parentView: AdapterView<*>?) {
+                    }
+                })
+                val dialog = builder.create()
+                dialog.window?.setGravity(Gravity.CENTER)
+                fsDialogBinding.apply {
+                    btnComplete.setOnClickListener {
+                        dialog.dismiss()
+                    }
+                }
+                dialog.show()
+            }
+            btnBackgroundColor.setOnClickListener {
+                val colorDlgBinding: ColorDialogBinding = ColorDialogBinding.inflate(layoutInflater)
+                var btnColorList = mutableListOf(
+                    colorDlgBinding.btnColor00,
+                    colorDlgBinding.btnColor01,
+                    colorDlgBinding.btnColor02,
+                    colorDlgBinding.btnColor03,
+                    colorDlgBinding.btnColor04,
+                    colorDlgBinding.btnColor05,
+                    colorDlgBinding.btnColor06,
+                    colorDlgBinding.btnColor07,
+                    colorDlgBinding.btnColor08,
+                )
+                btnColorList.forEachIndexed { idx, btn ->
+                    btn.setBackgroundColor(Color.parseColor(STRONG_COLORS[idx]))
+                    btn.setOnClickListener {
+                        editingNote.bgColor = idx.toString()
+                        updateUIBackgroundColor(idx)
+                    }
+                }
+                val builder = AlertDialog.Builder(requireContext()).apply {
+                    setView(colorDlgBinding.root)
+                    setCancelable(false)
+                }
+                val dialog = builder.create()
+                dialog.window?.setGravity(Gravity.CENTER)
+                colorDlgBinding.apply {
+                    btnComplete.setOnClickListener {
+                        dialog.dismiss()
+                    }
+                }
+                dialog.show()
+            }
+            btnTextColor.setOnClickListener {
+                val colorDlgBinding: ColorDialogBinding = ColorDialogBinding.inflate(layoutInflater)
+                var btnColorList = mutableListOf(
+                    colorDlgBinding.btnColor00,
+                    colorDlgBinding.btnColor01,
+                    colorDlgBinding.btnColor02,
+                    colorDlgBinding.btnColor03,
+                    colorDlgBinding.btnColor04,
+                    colorDlgBinding.btnColor05,
+                    colorDlgBinding.btnColor06,
+                    colorDlgBinding.btnColor07,
+                    colorDlgBinding.btnColor08,
+                )
+                btnColorList.forEachIndexed { idx, btn ->
+                    btn.setBackgroundColor(Color.parseColor(STRONG_COLORS[idx]))
+                    btn.setOnClickListener {
+                        editingNote.textColor = idx.toString()
+                        updateUITextColor(idx)
+                    }
+                }
+                val builder = AlertDialog.Builder(requireContext()).apply {
+                    setView(colorDlgBinding.root)
+                    setCancelable(false)
+                }
+                val dialog = builder.create()
+                dialog.window?.setGravity(Gravity.CENTER)
+                colorDlgBinding.apply {
+                    btnComplete.setOnClickListener {
+                        dialog.dismiss()
+                    }
+                }
+                dialog.show()
+            }
+            btnLink.setOnClickListener {
+                val linkDlgBinding: LinkDialogBinding = LinkDialogBinding.inflate(layoutInflater)
+                linkDlgBinding.inputLink.editText?.setText(editingNote.urlLink)
+                linkDlgBinding.inputLink.editText?.doAfterTextChanged {
+                    editingNote.urlLink = it.toString()
+                }
+                val builder = AlertDialog.Builder(requireContext()).apply {
+                    setView(linkDlgBinding.root)
+                    setCancelable(false)
+                }
+                val dialog = builder.create()
+                dialog.window?.setGravity(Gravity.CENTER)
+                linkDlgBinding.apply {
+                    btnComplete.setOnClickListener {
+                        dialog.dismiss()
+                    }
+                }
+                dialog.show()
+            }
             btnClose.setOnClickListener {
                 activity?.supportFragmentManager?.popBackStackImmediate()
             }
@@ -90,18 +251,6 @@ class NotesFragment : Fragment() {
             inputBody.setText(editingNote.body)
             inputBody.doAfterTextChanged {
                 editingNote.body = inputBody.text.toString()
-            }
-            inputFontSize.setText(editingNote.bodyFontSize)
-            inputFontSize.doAfterTextChanged {
-                editingNote.bodyFontSize = inputFontSize.text.toString()
-            }
-            inputTextColor.setText(editingNote.textColor)
-            inputTextColor.doAfterTextChanged {
-                editingNote.textColor = inputTextColor.text.toString()
-            }
-            inputBackgroundColor.setText(editingNote.bgColor)
-            inputBackgroundColor.doAfterTextChanged {
-                editingNote.bgColor = inputBackgroundColor.text.toString()
             }
             btnDelete.setOnClickListener {
                 deleteNoteClick()

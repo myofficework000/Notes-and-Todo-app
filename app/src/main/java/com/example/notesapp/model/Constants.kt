@@ -5,6 +5,7 @@ object Constants {
     const val TABLE_NAME_NOTES = "Notes"
 
     val STRONG_COLORS = arrayOf(
+        "#000000",
         "#DC143C",
         "#C71585",
         "#FFD700",
@@ -15,6 +16,7 @@ object Constants {
         "#00CED1"
     )
     val SOFT_COLORS = arrayOf(
+        "#DCDCDC",
         "#FFA07A",
         "#FFB6C1",
         "#FAFAD2",
@@ -23,5 +25,14 @@ object Constants {
         "#90EE90",
         "#8FBC8B",
         "#E0FFFF"
+    )
+    val FONT_SIZES = arrayOf(
+        40,
+        50,
+        60,
+        70,
+        80,
+        90,
+        100
     )
 }
