@@ -3,8 +3,6 @@ package com.example.notesapp.view.fragments
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.*
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
@@ -24,6 +22,7 @@ class TodoDialog : DialogFragment() {
     private val todoVM by lazy { ViewModelProvider(requireActivity())[TodoViewModel::class.java] }
     private lateinit var binding: TodoDialogBinding
     private val todoItems = mutableListOf<Todo>()
+    private val handler = Handler(Looper.getMainLooper())
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,6 +42,7 @@ class TodoDialog : DialogFragment() {
                     with(
                         Todo(
                             title = todoItemEdit.text.toString(),
+                            description = descriptionEdit.text.toString(),
                             priority = prioritySpinner.editText?.text.toString(),
                             category = categorySpinner.editText?.text.toString(),
                             isDone = isDoneDefault
@@ -73,14 +73,16 @@ class TodoDialog : DialogFragment() {
             ))
             setOnFocusChangeListener { _, b ->
                 if (b) showDropDown()
-                else if (!defaultPriorityList.contains(text.toString()) &&
-                    (!text.isDigitsOnly() || text.isBlank())
-                ) setText(getString(R.string.priorityDefault))
+                else {
+                    dismissDropDown()
+                    if (!defaultPriorityList.contains(text.toString()) &&
+                        (!text.isDigitsOnly() || text.isBlank())
+                    ) setText(getString(R.string.priorityDefault))
+                }
             }
             addTextChangedListener {
                 if (it?.isBlank() != false)
-                    Handler(Looper.getMainLooper())
-                        .postDelayed({ if (dialog != null) showDropDown() }, 100)
+                    handler.postDelayed({ if (dialog != null) showDropDown() }, 100)
             }
         }
 
@@ -90,11 +92,10 @@ class TodoDialog : DialogFragment() {
                 android.R.layout.simple_list_item_1,
                 resources.getStringArray(R.array.Category)
             ))
-            setOnFocusChangeListener { _, b -> if (b) showDropDown() }
+            setOnFocusChangeListener { _, b -> if (b) showDropDown() else dismissDropDown() }
             addTextChangedListener {
                 if (it?.isBlank() != false)
-                    Handler(Looper.getMainLooper())
-                        .postDelayed({ if (dialog != null) showDropDown() }, 100)
+                    handler.postDelayed({ if (dialog != null) showDropDown() }, 100)
             }
         }
     }
@@ -118,6 +119,7 @@ class TodoDialog : DialogFragment() {
         val timer = Timer()
         timer.schedule(object: TimerTask(){
             override fun run(){
+                handler.removeCallbacksAndMessages(null)
                 dialog.dismiss()
                 timer.cancel()
             }

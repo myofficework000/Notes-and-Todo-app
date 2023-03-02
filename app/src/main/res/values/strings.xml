@@ -21,9 +21,9 @@
     <string name="priorityDefault">Medium</string>
 
     <string-array name="Category">
-        <item>Category 1</item>
-        <item>Category 2</item>
-        <item>Category 3</item>
+        <item>Homework</item>
+        <item>Goal</item>
+        <item>Chores</item>
     </string-array>
     <string name="prioritySpinnerHint">Priority</string>
     <string name="categorySpinnerHint">Category</string>
@@ -32,5 +32,11 @@
     <string name="txtBody">Your note is here</string>
     <string name="category">Category</string>
     <string name="addTask">Add Task</string>
+    <string name="details">Details (Optional)</string>
+    <string name="textview">TextView</string>
+    <string name="mark_as_complete">Mark As Completed</string>
+    <string name="close">Close</string>
+    <string name="mark_as_incomplete">Mark As Incomplete</string>
+    <string name="detail_priority">Priority: %s</string>
 
 </resources>

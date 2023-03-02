@@ -14,7 +14,7 @@ interface TodoDao {
     @Query("select * from $TABLE_NAME_TODO")
     fun getAllTodo(): List<Todo>
     @Insert
-    fun addTodo(data: Todo)
+    fun addTodo(data: Todo): Long
     @Update
     fun updateTodo(data: Todo)
     @Delete
