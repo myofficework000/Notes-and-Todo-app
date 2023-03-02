@@ -21,8 +21,9 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun addTodo(data: Todo) = with(data) {
-        dao.addTodo(this)
-        _allTodos.setValue(_allTodos.value?.add(this))
+        dao.addTodo(this).also {
+            _allTodos.setValue(_allTodos.value?.add(this.copy(index = it)))
+        }
     }
 
     fun updateTodo(data: Todo) = dao.updateTodo(data)

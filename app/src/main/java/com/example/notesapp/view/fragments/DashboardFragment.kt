@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
@@ -25,39 +26,41 @@ class DashboardFragment : Fragment() {
     private val todoVM by lazy { ViewModelProvider(requireActivity())[TodoViewModel::class.java] }
     private val notesVM by lazy { ViewModelProvider(requireActivity())[NotesViewModel::class.java] }
     private val todoItems = mutableListOf<Todo>()
-    private lateinit var todoBinding: TodoItemBinding
     private val todoAdapter by lazy {
         RVAdapter(
             todoItems,
             { inflater, container, attach, vh ->
-                TodoItemBinding.inflate(inflater, container, attach).apply {
-                    todoBinding = this
-                }.run { vh(root) }
+                vh(TodoItemBinding.inflate(inflater, container, attach))
             }
-        ) { it, _ ->
-            todoBinding.todoItem.text = it.title
+        ) { it, b, _ ->
+            val binding = b as TodoItemBinding
+            binding.todoItem.apply {
+                text = it.title
+                strikeText(this, it.isDone)
+            }
 
-            todoBinding.noteCheckBox.apply {
+            binding.noteCheckBox.apply {
                 isChecked = it.isDone
-                setOnClickListener { _ ->
-                    todoVM.updateTodo(it.copy(isDone = isChecked))
-                    todoBinding.todoItem.apply {
-                        if(isChecked){
-                            paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
-                        }else{
-                            paintFlags = 0
-                        }
-                    }
-
+                setOnCheckedChangeListener { _, checked ->
+                    todoVM.updateTodo(it.copy(isDone = checked))
+                    strikeText(binding.todoItem, checked)
                 }
             }
-            todoBinding.deletetodo.setOnClickListener { _ ->
+            binding.deletetodo.setOnClickListener { _ ->
                 AlertDialog.Builder(requireContext())
                     .setTitle(R.string.deleting)
                     .setMessage(R.string.todoDeleteMsg)
                     .setNegativeButton(R.string.dialogNo) { _, _ -> }
                     .setPositiveButton(R.string.dialogYes) { _, _ -> todoVM.deleteTodo(it) }
                     .show()
+            }
+
+            binding.root.setOnClickListener {_->
+                TodoDetailFragment(it){ checked ->
+                    todoVM.updateTodo(it.copy(isDone = checked))
+                    strikeText(binding.todoItem, checked)
+                    binding.noteCheckBox.isChecked = checked
+                }.show(parentFragmentManager, "")
             }
         }
     }
@@ -118,5 +121,12 @@ class DashboardFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun strikeText(textView: TextView, isStruck: Boolean) = textView.apply {
+        paintFlags = if (isStruck)
+            paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+        else
+            paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
     }
 }
