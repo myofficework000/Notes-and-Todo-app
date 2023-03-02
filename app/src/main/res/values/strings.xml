@@ -32,5 +32,6 @@
     <string name="txtBody">Your note is here</string>
     <string name="category">Category</string>
     <string name="addTask">Add Task</string>
+    <string name="details">Details (Optional)</string>
 
 </resources>
