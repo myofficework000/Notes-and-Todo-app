@@ -1,56 +1,33 @@
 package com.example.notesapp.view.activity
 
-import android.os.Bundle
+import  android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.notesapp.R
 import com.example.notesapp.databinding.ActivityMainBinding
+import com.example.notesapp.databinding.FragmentDashboardBinding
 import com.example.notesapp.view.fragments.NotesFragment
 import com.example.notesapp.view.fragments.TodoDialog
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private var fragmentManger = supportFragmentManager
     private var floatingBtnVisible = false
+    private var fragmentManger = supportFragmentManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        initView()
-    }
-    private fun initView() {
-        binding.apply {
-            noteTodoBtn.setOnClickListener {
-                if (!floatingBtnVisible) {
-                    expandFloatingButton()
-                } else {
-                    hideFloatingButton()
-                }
-            }
-            todoBtn.setOnClickListener {
-                //fragmentManger.beginTransaction().replace(R.id.dashboardFragment, TodoFragment()).commit()
-                hideFloatingButton()
-                TodoDialog().show(supportFragmentManager,"TodoDialog")
-            }
-            noteBtn.setOnClickListener {
-                hideFloatingButton()
-                fragmentManger.beginTransaction()
-                    .add(R.id.dashboardFragment, NotesFragment())
-                    .addToBackStack(TAG_NOTES)
-                    .commit()
-            }
-        }
     }
 
-    private fun expandFloatingButton(){
-        binding.apply{
-            noteBtn.show()
-            todoBtn.show()
-            noteBtn.visibility = View.VISIBLE
-            todoBtn.visibility = View.VISIBLE
-            noteTodoBtn.setImageResource(R.drawable.baseline_floating_close_24)
-            floatingBtnVisible = true
-        }
+    fun openTodoFragment(){
+        TodoDialog().show(supportFragmentManager,"TodoDialog")
+    }
+    fun openNoteFragment(){
+        fragmentManger.beginTransaction()
+            .add(R.id.dashboardFragment, NotesFragment())
+            .addToBackStack(MainActivity.TAG_NOTES)
+            .commit()
     }
     override fun onBackPressed() {
         val count = supportFragmentManager.backStackEntryCount
@@ -62,17 +39,6 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.popBackStack()
         }
     }
-    private fun hideFloatingButton() {
-        binding.apply {
-            noteBtn.hide()
-            todoBtn.hide()
-            noteBtn.visibility = View.GONE
-            todoBtn.visibility = View.GONE
-            noteTodoBtn.setImageResource(R.drawable.baseline_add_24)
-            floatingBtnVisible = false
-        }
-    }
-
     companion object {
         const val TAG_NOTES = "Notes Fragment"
     }
