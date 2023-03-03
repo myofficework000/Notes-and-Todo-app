@@ -3,6 +3,8 @@ package com.example.notesapp.view.fragments
 import android.app.AlertDialog
 import android.graphics.Color
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.style.UnderlineSpan
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -110,8 +112,16 @@ class NotesFragment : Fragment() {
         binding.inputBody.setTextSize(TypedValue.COMPLEX_UNIT_PX, FONT_SIZES[fontSize].toFloat())
     }
 
+    private fun updateLinkText(str: String) {
+        val underlineLink = SpannableString(editingNote.urlLink)
+        underlineLink.setSpan(UnderlineSpan(), 0, underlineLink.length, 0)
+        binding.txtLink.text = underlineLink
+    }
+
     private fun initViews() {
         binding.apply {
+
+            updateLinkText(editingNote.urlLink)
             updateUIBackgroundColor(stringInt(editingNote.bgColor, true))
             updateUITextColor(stringInt(editingNote.textColor, true))
             updateUIFontSize(stringInt(editingNote.bodyFontSize))
@@ -220,6 +230,7 @@ class NotesFragment : Fragment() {
                 linkDlgBinding.inputLink.editText?.setText(editingNote.urlLink)
                 linkDlgBinding.inputLink.editText?.doAfterTextChanged {
                     editingNote.urlLink = it.toString()
+                    updateLinkText(editingNote.urlLink)
                 }
                 val builder = AlertDialog.Builder(requireContext()).apply {
                     setView(linkDlgBinding.root)
