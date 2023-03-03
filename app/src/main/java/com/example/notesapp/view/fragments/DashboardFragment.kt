@@ -14,14 +14,16 @@ import com.example.notesapp.R
 import com.example.notesapp.databinding.FragmentDashboardBinding
 import com.example.notesapp.databinding.TodoItemBinding
 import com.example.notesapp.model.local.entity.Todo
+import com.example.notesapp.view.activity.MainActivity
 import com.example.notesapp.view.adapters.NoteAdapter
 import com.example.notesapp.view.adapters.RVAdapter
 import com.example.notesapp.viewmodel.NotesViewModel
 import com.example.notesapp.viewmodel.TodoViewModel
 
 class DashboardFragment : Fragment() {
-
     private lateinit var binding: FragmentDashboardBinding
+    private var floatingBtnVisible = false
+
     private val todoVM by lazy { ViewModelProvider(requireActivity())[TodoViewModel::class.java] }
     private val notesVM by lazy { ViewModelProvider(requireActivity())[NotesViewModel::class.java] }
     private val todoItems = mutableListOf<Todo>()
@@ -78,8 +80,49 @@ class DashboardFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         noteInterface()
         initTodoList()
+        initFloatingButton()
+    }
+    private fun initFloatingButton() {
+        binding.apply {
+            noteTodoBtn.setOnClickListener {
+                if (!floatingBtnVisible) {
+                    expandFloatingButton()
+                } else {
+                    hideFloatingButton()
+                }
+            }
+            todoBtn.setOnClickListener {
+                hideFloatingButton()
+                (activity as MainActivity).openTodoFragment()
+
+            }
+            noteBtn.setOnClickListener {
+                hideFloatingButton()
+                (activity as MainActivity).openNoteFragment()
+            }
+        }
+    }
+    private fun expandFloatingButton(){
+        binding.apply{
+            noteBtn.show()
+            todoBtn.show()
+            noteBtn.visibility = View.VISIBLE
+            todoBtn.visibility = View.VISIBLE
+            noteTodoBtn.setImageResource(R.drawable.baseline_floating_close_24)
+            floatingBtnVisible = true
+        }
     }
 
+    private fun hideFloatingButton() {
+        binding.apply {
+            noteBtn.hide()
+            todoBtn.hide()
+            noteBtn.visibility = View.GONE
+            todoBtn.visibility = View.GONE
+            noteTodoBtn.setImageResource(R.drawable.baseline_add_24)
+            floatingBtnVisible = false
+        }
+    }
     private fun noteInterface() {
         binding.RVNotes.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
@@ -122,7 +165,6 @@ class DashboardFragment : Fragment() {
             }
         }
     }
-
     private fun strikeText(textView: TextView, isStruck: Boolean) = textView.apply {
         paintFlags = if (isStruck)
             paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
