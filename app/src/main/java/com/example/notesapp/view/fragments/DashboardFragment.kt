@@ -129,7 +129,7 @@ class DashboardFragment : Fragment() {
         notesVM.allNotes.observe(this.viewLifecycleOwner) {
 
             it?.let {
-                binding.RVNotes.adapter = NoteAdapter(it)
+                binding.RVNotes.adapter = NoteAdapter(it, requireContext())
             }
         }
     }

@@ -1,9 +1,8 @@
 package com.example.notesapp.view.adapters
 
 
-import android.app.Activity
-import android.graphics.Color
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -40,24 +39,20 @@ class NoteAdapter(private val noteList: List<Note>, val context: Context) :
 
     override fun onBindViewHolder(holder: NotesViewHolder, position: Int) {
         holder.bind(noteList[position])
-        val data = Bundle()
-        data.putParcelable("note", noteList[position])
-        val notesFragment = NotesFragment()
-        notesFragment.arguments = data
         holder.itemView.setOnClickListener { v ->
-            var locked: Boolean = noteList[position].isStarred.toBoolean()
-            locked = !locked
+            val locked = noteList[position].isLocked.toBoolean()
             noteList[position].isLocked == locked.toString()
-            if(locked){
-                showLockedNoteDialog(noteList[position],position)
+            if (locked) {
+                showLockedNoteDialog(noteList[position], position)
+            } else {
+                val activity = v!!.context as AppCompatActivity
+                activity.supportFragmentManager.beginTransaction()
+                    .add(R.id.dashboardFragment, getBundleData(position))
+                    .addToBackStack(MainActivity.TAG_NOTES).commit()
             }
-            val activity = v!!.context as AppCompatActivity
-            activity.supportFragmentManager.beginTransaction()
-                .add(R.id.dashboardFragment, notesFragment)
-                .addToBackStack(MainActivity.TAG_NOTES).commit()
         }
         holder.itemView.setOnLongClickListener { v ->
-            showLongClicked(noteList[position],position)
+            showLongClicked(noteList[position], position)
             true
         }
         noteItemBinding.apply {
@@ -67,14 +62,21 @@ class NoteAdapter(private val noteList: List<Note>, val context: Context) :
                 noteList[position].isStarred = starred.toString()
                 if (starred) {
                     imgFavorite.setImageResource(R.drawable.baseline_star_24)
-                }
-                else {
+                } else {
                     imgFavorite.setImageResource(R.drawable.favorite_star_24)
                 }
             }
 
         }
 
+    }
+
+    private fun getBundleData(position: Int): NotesFragment {
+        val data = Bundle()
+        data.putParcelable("note", noteList[position])
+        val notesFragment = NotesFragment()
+        notesFragment.arguments = data
+        return notesFragment
     }
 
 
@@ -110,7 +112,8 @@ class NoteAdapter(private val noteList: List<Note>, val context: Context) :
     }
 
     private fun showLockedNoteDialog(note: Note, index: Int) {
-        lockedDialogBinding = LockedDialogBinding.inflate(LayoutInflater.from(context),noteItemBinding.root,false)
+        lockedDialogBinding =
+            LockedDialogBinding.inflate(LayoutInflater.from(context), noteItemBinding.root, false)
         val view = lockedDialogBinding.root
         val builder = AlertDialog.Builder(context).apply {
             setView(view)
@@ -119,9 +122,14 @@ class NoteAdapter(private val noteList: List<Note>, val context: Context) :
                 val dialogPasscode = lockedDialogBinding.edPassword.text.toString()
                 if (dialogPasscode != note.passcode) {
                     showIncorrectCodeMsg()
+                } else {
+                    d.dismiss()
+                    val activity = view.context as AppCompatActivity
+                    activity.supportFragmentManager.beginTransaction()
+                        .add(R.id.dashboardFragment, getBundleData(index))
+                        .addToBackStack(MainActivity.TAG_NOTES).commit()
                 }
                 lockedDialogBinding.edPassword.text?.clear()
-                d.dismiss()
             }
             setNegativeButton("Cancel") { d, _ ->
                 d.dismiss()
@@ -141,6 +149,7 @@ class NoteAdapter(private val noteList: List<Note>, val context: Context) :
             Snackbar.LENGTH_SHORT
         ).show()
     }
+
     private fun showLongClicked(note: Note, index: Int) {
         val view = lockedDialogBinding.root
         val builder = AlertDialog.Builder(context).apply {
@@ -160,8 +169,6 @@ class NoteAdapter(private val noteList: List<Note>, val context: Context) :
         }
         builder.show()
     }
-
-
 
 
 }
