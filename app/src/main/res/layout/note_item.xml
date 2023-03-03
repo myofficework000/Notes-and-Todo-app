@@ -60,8 +60,8 @@
             android:padding="@dimen/_4dp"
             android:text="@string/noteTitle"
             android:textColor="@color/white"
-            android:textSize="@dimen/_20sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textSize="@dimen/_20sp" />
 
         <TextView
             android:id="@+id/txtNoteBody"
@@ -71,7 +71,7 @@
             android:layout_margin="@dimen/_4dp"
             android:padding="@dimen/_4dp"
             android:text="@string/txtBody"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="@dimen/_15sp" />
 
         <TextView
@@ -85,7 +85,7 @@
             android:layout_marginBottom="@dimen/_4dp"
             android:padding="@dimen/_4dp"
             android:text="@string/updateTime"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="@dimen/_13sp" />
     </RelativeLayout>
 

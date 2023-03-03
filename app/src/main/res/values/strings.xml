@@ -41,5 +41,5 @@
     <string name="todo_title_empty_error">Title cannot be empty</string>
     <string name="add">Add</string>
     <string name="cancel">Cancel</string>
-
+    <string name="password">Enter passcode</string>
 </resources>
