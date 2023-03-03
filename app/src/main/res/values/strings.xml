@@ -42,5 +42,5 @@
     <string name="add">Add</string>
     <string name="cancel">Cancel</string>
     <string name="bad_url">Your url is not correct</string>
-
+    <string name="password">Enter passcode</string>
 </resources>
