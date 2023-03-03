@@ -1,7 +1,9 @@
 package com.example.notesapp.view.fragments
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.style.UnderlineSpan
@@ -112,10 +114,22 @@ class NotesFragment : Fragment() {
         binding.inputBody.setTextSize(TypedValue.COMPLEX_UNIT_PX, FONT_SIZES[fontSize].toFloat())
     }
 
-    private fun updateLinkText(str: String) {
-        val underlineLink = SpannableString(editingNote.urlLink)
+    private fun updateLinkText(urlLinkText: String) {
+        val underlineLink = SpannableString(urlLinkText)
         underlineLink.setSpan(UnderlineSpan(), 0, underlineLink.length, 0)
         binding.txtLink.text = underlineLink
+        binding.txtLink.setOnClickListener {
+            openBrowser(urlLinkText)
+        }
+    }
+
+    private fun openBrowser(urlLinkText: String) {
+        if (urlLinkText.contains("https://")) {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(urlLinkText))
+            requireContext().startActivity(intent)
+        } else {
+            Toast.makeText(requireContext(), getString(R.string.bad_url), Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun initViews() {
