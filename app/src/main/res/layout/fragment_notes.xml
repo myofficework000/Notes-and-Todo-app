@@ -122,13 +122,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/layoutToolbarScroll"
+        app:layout_constraintBottom_toTopOf="@id/txtLink"
         android:hint="@string/Title"
+        />
+    <TextView
+        android:id="@+id/txtLink"
+        android:layout_margin="@dimen/_4dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/inputTitle"
+        app:layout_constraintBottom_toTopOf="@id/inputBody"
+        android:textColor="@color/purple_700"
+        android:text="link"
         />
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/inputBody"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/inputTitle"
+        app:layout_constraintTop_toBottomOf="@id/txtLink"
         app:layout_constraintBottom_toBottomOf="parent"
         android:hint="@string/txtBody"
         android:gravity="top"
