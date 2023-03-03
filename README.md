@@ -2,7 +2,8 @@
 Fully functional Notes and Todo app template.  
 
 # About Todo
-- by josh & Luan
+- Add events in your To-do list, with categories, priorities and a detailed description available as additional information
+- Cross off or delete the item when needed. It does not annoy you when the deadline approaches.
 
 # About Notes
 - Add a note with a customization of background colors, text color, font size and add a url add on.
