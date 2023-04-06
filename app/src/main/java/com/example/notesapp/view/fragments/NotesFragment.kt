@@ -18,6 +18,8 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.example.notesapp.R
 import com.example.notesapp.databinding.ColorDialogBinding
 import com.example.notesapp.databinding.FragmentNotesBinding
@@ -30,6 +32,8 @@ import com.example.notesapp.model.local.AppDatabase
 import com.example.notesapp.model.local.dao.NoteDao
 import com.example.notesapp.model.local.entity.Note
 import com.example.notesapp.utils.Common.stringInt
+import com.example.notesapp.viewmodel.NotesViewModel
+import kotlinx.coroutines.launch
 import java.util.*
 
 
@@ -53,17 +57,23 @@ class NotesFragment : Fragment() {
     private lateinit var editingNote: Note
     private lateinit var db: AppDatabase
     private lateinit var noteDao: NoteDao
+    private lateinit var notesViewModel: NotesViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentNotesBinding.inflate(inflater, container, false)
+        initViewModel()
         initDatabase()
         val noteParam = arguments?.getParcelable<Note>("note")
         initData(noteParam)
         initViews()
         return binding.root
+    }
+
+    private fun initViewModel() {
+        notesViewModel = ViewModelProvider(this)[NotesViewModel::class.java]
     }
 
     private fun initDatabase() {
@@ -318,7 +328,8 @@ class NotesFragment : Fragment() {
             Toast.makeText(requireContext(), "Nothing to delete", Toast.LENGTH_SHORT).show()
         } else {
             Toast.makeText(requireContext(), "Successfully deleted", Toast.LENGTH_SHORT).show()
-            noteDao.delete(note)
+            //noteDao.delete(note)
+            notesViewModel.delete(note)
             activity?.supportFragmentManager?.popBackStack()
         }
     }
@@ -327,10 +338,13 @@ class NotesFragment : Fragment() {
         if (editingNote != note) {
             if (note.index <= 0) {
                 note = editingNote.copy()
-                noteDao.insert(note)
+                //noteDao.insert(note)
+                notesViewModel.insert(note)
+
             } else {
                 note = editingNote.copy()
-                noteDao.update(note)
+                //noteDao.update(note)
+                notesViewModel.update(note)
             }
             Toast.makeText(requireContext(), "Saved successfully", Toast.LENGTH_SHORT).show()
             activity?.supportFragmentManager?.popBackStack()

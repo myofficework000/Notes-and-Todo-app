@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.notesapp.R
 import com.example.notesapp.databinding.FragmentDashboardBinding
@@ -19,9 +20,11 @@ import com.example.notesapp.view.adapters.NoteAdapter
 import com.example.notesapp.view.adapters.RVAdapter
 import com.example.notesapp.viewmodel.NotesViewModel
 import com.example.notesapp.viewmodel.TodoViewModel
+import kotlinx.coroutines.launch
 
 class DashboardFragment : Fragment() {
     private lateinit var binding: FragmentDashboardBinding
+    private lateinit var layoutManager: LinearLayoutManager
     private var floatingBtnVisible = false
 
     private val todoVM by lazy { ViewModelProvider(requireActivity())[TodoViewModel::class.java] }
@@ -78,9 +81,17 @@ class DashboardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        noteInterface()
+        notesVM.getAlNotes()
+        layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        binding.RVNotes.layoutManager = layoutManager
+        observeViewChanges()
         initTodoList()
         initFloatingButton()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        notesVM.getAlNotes()
     }
     private fun initFloatingButton() {
         binding.apply {
@@ -123,17 +134,14 @@ class DashboardFragment : Fragment() {
             floatingBtnVisible = false
         }
     }
-    private fun noteInterface() {
-        binding.RVNotes.layoutManager =
-            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        notesVM.allNotes.observe(this.viewLifecycleOwner) {
 
+    private fun observeViewChanges() {
+        notesVM.allNotes.observe(this.viewLifecycleOwner){
             it?.let {
-                binding.RVNotes.adapter = NoteAdapter(it, requireContext())
+                binding.RVNotes.adapter = NoteAdapter(it,requireContext())
             }
         }
     }
-
     private fun initTodoList() {
         binding.RVTodo.apply {
             layoutManager = LinearLayoutManager(context)
