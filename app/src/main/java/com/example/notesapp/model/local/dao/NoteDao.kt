@@ -8,14 +8,15 @@ import com.example.notesapp.model.local.entity.Note
 @Dao
 interface NoteDao {
     @Insert
-    fun insert(note: Note)
+    //fun insert(note: Note)
+    suspend fun insert(note: Note)
 
     @Delete
-    fun delete(note: Note)
+    suspend fun delete(note: Note)
 
     @Update
-    fun update(note: Note)
+    suspend fun update(note: Note)
 
     @Query("SELECT * FROM $TABLE_NAME_NOTES")
-    fun getAllNotes(): LiveData<List<Note>>
+    suspend fun getAllNotes(): List<Note>
 }

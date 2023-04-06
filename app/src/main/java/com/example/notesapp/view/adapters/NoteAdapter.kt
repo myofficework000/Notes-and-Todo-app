@@ -26,13 +26,11 @@ class NoteAdapter(private val noteList: List<Note>, val context: Context) :
     RecyclerView.Adapter<NoteAdapter.NotesViewHolder>() {
     private lateinit var noteItemBinding: NoteItemBinding
     private lateinit var lockedDialogBinding: LockedDialogBinding
-    private lateinit var db: AppDatabase
-    private lateinit var noteDao: NoteDao
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotesViewHolder {
         noteItemBinding =
             NoteItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return NotesViewHolder(noteItemBinding.root)
+        return NotesViewHolder(noteItemBinding)
     }
 
     override fun getItemCount(): Int = noteList.size
@@ -80,10 +78,10 @@ class NoteAdapter(private val noteList: List<Note>, val context: Context) :
     }
 
 
-    inner class NotesViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    inner class NotesViewHolder(val view: NoteItemBinding) : RecyclerView.ViewHolder(view.root) {
         fun bind(note: Note) {
             note.apply {
-                noteItemBinding.apply {
+                view.apply {
                     txtNoteTitle.text = title
                     txtNoteBody.text = body
 
