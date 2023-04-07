@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.notesapp.model.Constants
 import com.example.notesapp.model.local.dao.NoteDao
 import com.example.notesapp.model.local.dao.TodoDao
 import com.example.notesapp.model.local.entity.Note
@@ -23,8 +24,8 @@ abstract class AppDatabase : RoomDatabase() {
                 INSTANCE = Room.databaseBuilder(
                     context.applicationContext,
                     AppDatabase::class.java,
-                    "noteDB"
-                ).allowMainThreadQueries().build()
+                    Constants.NOTE_DB
+                ).build()
             }
             return INSTANCE as AppDatabase
         }

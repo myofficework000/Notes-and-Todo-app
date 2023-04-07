@@ -1,6 +1,7 @@
 package com.example.notesapp.model
 
 object Constants {
+    const val NOTE_DB= "noteDB"
     const val TABLE_NAME_TODO = "Todo"
     const val TABLE_NAME_NOTES = "Notes"
 
