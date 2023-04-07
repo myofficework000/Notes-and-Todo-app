@@ -25,6 +25,7 @@ import com.example.notesapp.databinding.ColorDialogBinding
 import com.example.notesapp.databinding.FragmentNotesBinding
 import com.example.notesapp.databinding.FsDialogBinding
 import com.example.notesapp.databinding.LinkDialogBinding
+import com.example.notesapp.model.Constants
 import com.example.notesapp.model.Constants.FONT_SIZES
 import com.example.notesapp.model.Constants.SOFT_COLORS
 import com.example.notesapp.model.Constants.STRONG_COLORS
