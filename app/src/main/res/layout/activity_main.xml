@@ -1,22 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.fragment.app.FragmentContainerView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="?colorBackgroundFloating"
-    tools:context=".view.activity.MainActivity">
-
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/dashboardFragment"
-        android:name="com.example.notesapp.view.fragments.DashboardFragment"
+        android:id="@+id/fragmentContainerView"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout="@layout/fragment_dashboard"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
-    </androidx.fragment.app.FragmentContainerView>
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/app_nav"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="344dp" >
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/dashboardFragment"
+            android:name="com.example.notesapp.view.fragments.DashboardFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:layout="@layout/fragment_dashboard"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+        </androidx.fragment.app.FragmentContainerView>
+
+</androidx.fragment.app.FragmentContainerView>

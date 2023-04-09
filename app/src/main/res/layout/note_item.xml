@@ -2,12 +2,15 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/mainCard"
-    android:layout_width="200dp"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/_5dp"
-    app:cardBackgroundColor="@android:color/darker_gray"
-    app:cardCornerRadius="@dimen/_5dp"
-    app:cardElevation="@dimen/_10dp">
+    app:cardBackgroundColor="@color/teal_200"
+    app:cardCornerRadius="@dimen/_8dp"
+    app:cardElevation="@dimen/_8dp"
+    app:cardMaxElevation="@dimen/_10dp"
+    app:cardPreventCornerOverlap="true"
+    app:cardUseCompatPadding="true">
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -15,7 +18,7 @@
 
         <LinearLayout
             android:id="@+id/layoutToolbar"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
             <TextView
@@ -71,7 +74,7 @@
             android:layout_margin="@dimen/_4dp"
             android:padding="@dimen/_4dp"
             android:text="@string/txtBody"
-            android:textColor="@color/black"
+            android:textColor="@color/default_text_color"
             android:textSize="@dimen/_15sp" />
 
         <TextView
@@ -85,7 +88,7 @@
             android:layout_marginBottom="@dimen/_4dp"
             android:padding="@dimen/_4dp"
             android:text="@string/updateTime"
-            android:textColor="@color/black"
+            android:textColor="@color/default_text_color"
             android:textSize="@dimen/_13sp" />
     </RelativeLayout>
 

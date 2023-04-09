@@ -39,7 +39,7 @@ class NoteAdapter(private val noteList: List<Note>, val context: Context) :
         holder.bind(noteList[position])
         holder.itemView.setOnClickListener { v ->
             val locked = noteList[position].isLocked.toBoolean()
-            noteList[position].isLocked == locked.toString()
+            noteList[position].isLocked = locked.toString()
             if (locked) {
                 showLockedNoteDialog(noteList[position], position)
             } else {
@@ -141,7 +141,6 @@ class NoteAdapter(private val noteList: List<Note>, val context: Context) :
 
     private fun showIncorrectCodeMsg() {
         Snackbar.make(
-            context,
             noteItemBinding.root,
             "Incorrect passcode",
             Snackbar.LENGTH_SHORT
