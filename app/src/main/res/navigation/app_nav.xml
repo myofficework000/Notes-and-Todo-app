@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/app_nav"
+    app:startDestination="@id/splashScreen3">
+
+    <fragment
+        android:id="@+id/dashboardFragment3"
+        android:name="com.example.notesapp.view.fragments.DashboardFragment"
+        android:label="fragment_dashboard"
+        tools:layout="@layout/fragment_dashboard" >
+        <action
+            android:id="@+id/action_dashboardFragment3_to_notesFragment3"
+            app:destination="@id/notesFragment3" />
+        <action
+            android:id="@+id/action_dashboardFragment3_to_todoDialog"
+            app:destination="@id/todoDialog" />
+    </fragment>
+    <fragment
+        android:id="@+id/notesFragment3"
+        android:name="com.example.notesapp.view.fragments.NotesFragment"
+        android:label="fragment_notes"
+        tools:layout="@layout/fragment_notes" >
+        <action
+            android:id="@+id/action_notesFragment3_to_dashboardFragment3"
+            app:destination="@id/dashboardFragment3" />
+    </fragment>
+    <dialog
+        android:id="@+id/todoDialog"
+        android:name="com.example.notesapp.view.fragments.TodoDialog"
+        android:label="fs_dialog"
+        tools:layout="@layout/fs_dialog" >
+        <action
+            android:id="@+id/action_todoDialog_to_todoDetailFragment2"
+            app:destination="@id/todoDetailFragment2" />
+        <action
+            android:id="@+id/action_todoDialog_to_dashboardFragment3"
+            app:destination="@id/dashboardFragment3" />
+    </dialog>
+    <dialog
+        android:id="@+id/todoDetailFragment2"
+        android:name="com.example.notesapp.view.fragments.TodoDetailFragment"
+        android:label="fragment_todo_detail"
+        tools:layout="@layout/fragment_todo_detail" >
+        <action
+            android:id="@+id/action_todoDetailFragment2_to_dashboardFragment3"
+            app:destination="@id/dashboardFragment3" />
+    </dialog>
+    <fragment
+        android:id="@+id/splashScreen3"
+        android:name="com.example.notesapp.view.fragments.SplashScreen"
+        android:label="SplashScreen" >
+        <action
+            android:id="@+id/action_splashScreen3_to_dashboardFragment3"
+            app:destination="@id/dashboardFragment3" />
+    </fragment>
+</navigation>

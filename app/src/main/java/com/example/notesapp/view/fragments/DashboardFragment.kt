@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.notesapp.R
 import com.example.notesapp.databinding.FragmentDashboardBinding
@@ -102,12 +103,12 @@ class DashboardFragment : Fragment() {
             }
             todoBtn.setOnClickListener {
                 hideFloatingButton()
-                (activity as MainActivity).openTodoFragment()
+                findNavController().navigate(R.id.todoDialog)
 
             }
             noteBtn.setOnClickListener {
                 hideFloatingButton()
-                (activity as MainActivity).openNoteFragment()
+                findNavController().navigate(R.id.notesFragment3)
             }
         }
     }

@@ -20,6 +20,7 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.example.notesapp.R
 import com.example.notesapp.databinding.ColorDialogBinding
 import com.example.notesapp.databinding.FragmentNotesBinding
@@ -329,9 +330,8 @@ class NotesFragment : Fragment() {
             Toast.makeText(requireContext(), "Nothing to delete", Toast.LENGTH_SHORT).show()
         } else {
             Toast.makeText(requireContext(), "Successfully deleted", Toast.LENGTH_SHORT).show()
-            //noteDao.delete(note)
             notesViewModel.delete(note)
-            activity?.supportFragmentManager?.popBackStack()
+            findNavController().navigate(R.id.action_notesFragment3_to_dashboardFragment3)
         }
     }
 
@@ -339,16 +339,14 @@ class NotesFragment : Fragment() {
         if (editingNote != note) {
             if (note.index <= 0) {
                 note = editingNote.copy()
-                //noteDao.insert(note)
                 notesViewModel.insert(note)
 
             } else {
                 note = editingNote.copy()
-                //noteDao.update(note)
                 notesViewModel.update(note)
             }
             Toast.makeText(requireContext(), "Saved successfully", Toast.LENGTH_SHORT).show()
-            activity?.supportFragmentManager?.popBackStack()
+            findNavController().navigate(R.id.action_notesFragment3_to_dashboardFragment3)
         } else {
             Toast.makeText(requireContext(), "Nothing to save", Toast.LENGTH_SHORT).show()
         }
