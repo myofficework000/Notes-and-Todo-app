@@ -18,7 +18,7 @@ object Common {
     fun stringInt(str: String?, isColorNo: Boolean = false): Int {
         if (str == null) return 0
         if (str.isEmpty()) return 0
-        var intVal = str.toInt()
+        var intVal = str.toIntOrNull() ?: 0
         if (isColorNo) {
             if (intVal > Constants.SOFT_COLORS.size - 1) {
                 intVal = Constants.SOFT_COLORS.size - 1

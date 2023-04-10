@@ -3,7 +3,7 @@
              xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/app_nav"
-    app:startDestination="@id/dashboardFragment3">
+    app:startDestination="@id/splashScreen3">
 
     <fragment
         android:id="@+id/dashboardFragment3"
@@ -47,4 +47,12 @@
             android:id="@+id/action_todoDetailFragment2_to_dashboardFragment3"
             app:destination="@id/dashboardFragment3" />
     </dialog>
+    <fragment
+        android:id="@+id/splashScreen3"
+        android:name="com.example.notesapp.view.fragments.SplashScreen"
+        android:label="SplashScreen" >
+        <action
+            android:id="@+id/action_splashScreen3_to_dashboardFragment3"
+            app:destination="@id/dashboardFragment3" />
+    </fragment>
 </navigation>

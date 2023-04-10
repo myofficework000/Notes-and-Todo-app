@@ -5,20 +5,17 @@ import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notesapp.R
 import com.example.notesapp.databinding.LockedDialogBinding
 import com.example.notesapp.databinding.NoteItemBinding
 import com.example.notesapp.model.Constants
-import com.example.notesapp.model.local.AppDatabase
-import com.example.notesapp.model.local.dao.NoteDao
 import com.example.notesapp.model.local.entity.Note
 import com.example.notesapp.utils.Common
-import com.example.notesapp.view.activity.MainActivity
 import com.example.notesapp.view.fragments.NotesFragment
 import com.google.android.material.snackbar.Snackbar
 
@@ -26,6 +23,7 @@ class NoteAdapter(private val noteList: List<Note>, val context: Context) :
     RecyclerView.Adapter<NoteAdapter.NotesViewHolder>() {
     private lateinit var noteItemBinding: NoteItemBinding
     private lateinit var lockedDialogBinding: LockedDialogBinding
+    private lateinit var navController: NavController
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotesViewHolder {
         noteItemBinding =
@@ -43,10 +41,10 @@ class NoteAdapter(private val noteList: List<Note>, val context: Context) :
             if (locked) {
                 showLockedNoteDialog(noteList[position], position)
             } else {
-                val activity = v!!.context as AppCompatActivity
-                activity.supportFragmentManager.beginTransaction()
-                    .add(R.id.dashboardFragment, getBundleData(position))
-                    .addToBackStack(MainActivity.TAG_NOTES).commit()
+                val bundle = Bundle()
+                bundle.putParcelable("note",noteList[position])
+                navController = holder.itemView.findNavController()
+                navController.navigate(R.id.action_dashboardFragment3_to_notesFragment3,bundle)
             }
         }
         holder.itemView.setOnLongClickListener { v ->
@@ -120,13 +118,13 @@ class NoteAdapter(private val noteList: List<Note>, val context: Context) :
                 val dialogPasscode = lockedDialogBinding.edPassword.text.toString()
                 if (dialogPasscode != note.passcode) {
                     showIncorrectCodeMsg()
-                } else {
+                } /*else {
                     d.dismiss()
                     val activity = view.context as AppCompatActivity
                     activity.supportFragmentManager.beginTransaction()
                         .add(R.id.dashboardFragment, getBundleData(index))
                         .addToBackStack(MainActivity.TAG_NOTES).commit()
-                }
+                }*/
                 lockedDialogBinding.edPassword.text?.clear()
             }
             setNegativeButton("Cancel") { d, _ ->

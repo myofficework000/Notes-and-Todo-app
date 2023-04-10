@@ -7,20 +7,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:defaultNavHost="true"
-        app:navGraph="@navigation/app_nav"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="344dp" >
-
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/dashboardFragment"
-            android:name="com.example.notesapp.view.fragments.DashboardFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:layout="@layout/fragment_dashboard"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent">
-        </androidx.fragment.app.FragmentContainerView>
+        app:navGraph="@navigation/app_nav">
 
 </androidx.fragment.app.FragmentContainerView>
