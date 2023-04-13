@@ -9,7 +9,7 @@ import com.example.notesapp.model.local.entity.Note
 interface NoteDao {
     @Insert
     //fun insert(note: Note)
-    suspend fun insert(note: Note)
+    suspend fun insert(note: Note): Long
 
     @Delete
     suspend fun delete(note: Note)
