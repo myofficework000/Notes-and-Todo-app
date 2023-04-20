@@ -49,6 +49,32 @@ class NoteDaoTest {
     }
 
     @Test
+    fun testUpdateNoteDatabase() = runTest{
+        var insertNote = Note(
+            "Note 1",
+            "this is note 1",
+            "04/13/2023",
+            "12345",
+            "",
+            "White",
+            "",
+            "",
+            "",
+            0,
+            ""
+        )
+        val insertedId = noteDao.insert(insertNote)
+        insertNote.title = "Note 2"
+        insertNote.index = insertedId.toInt()
+
+        noteDao.update(insertNote)
+
+        val noteList = noteDao.getAllNotes()
+        assertEquals(1, noteList.size)
+        assertEquals("Note 2", noteList[0].title)
+    }
+
+    @Test
     fun testDeleteItem() = runTest{
         val note = Note(
             "Note 1",
