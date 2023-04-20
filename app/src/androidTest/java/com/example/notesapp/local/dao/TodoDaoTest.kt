@@ -58,4 +58,46 @@ class TodoDaoTest {
         todoDao.deleteTodo(todo)
         assertEquals(0,todoDao.getAllTodo().size)
     }
+
+    @Test
+    fun testUpdateTodo() = runTest{
+        val todo = Todo(
+            2,
+            "Todo 69",
+            "Low",
+            "",
+            true,
+            "Nice"
+        )
+        val expectedTodo = Todo(
+            2,
+            "Todo 42",
+            "Low",
+            "",
+            false,
+            "Answers"
+        )
+        todoDao.addTodo(todo)
+
+        // First update
+        todoDao.updateTodo(todo.copy(
+            title = "Todo 42",
+            isDone = false
+        ))
+        val resultTodo1 = todoDao.getAllTodo().last()
+
+        assertEquals("Todo 42", resultTodo1.title)
+        assertEquals(false, resultTodo1.isDone)
+
+        // Update again just in case
+        todoDao.updateTodo(resultTodo1.copy(
+            description = "Answers"
+        ))
+        val resultTodo2 = todoDao.getAllTodo().last()
+
+        assertEquals("Answers", resultTodo2.description)
+
+        // Final assert to make sure all these changes give us an expected object
+        assertEquals(expectedTodo, resultTodo2)
+    }
 }
