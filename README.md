@@ -1,4 +1,4 @@
-# Notes-and-Todo-app
+# Notes and Todo list app
 Fully functional Note and Todo app template.  
 
 # About Todo
