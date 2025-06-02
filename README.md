@@ -1,5 +1,5 @@
 📋 Notes and Todo List App
-A fully functional and customizable Notes and Todo list app template, designed to help you organize tasks and ideas effortlessly.
+A fully functional and customizable Notes and Todo list app template, designed to help you organize tasks and ideas.
 
 🚀 Features Overview
 📝 Todo List
