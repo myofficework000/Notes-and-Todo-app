@@ -1,7 +1,7 @@
 📋 Notes and Todo List App
 A fully functional and customizable Notes and Todo list app template, designed to help you organize tasks and ideas.
 
-🚀 Features Overview
+Features Overview
 📝 Todo List
 Organize Events: Add tasks with categories, set priorities, and include detailed descriptions.
 Mark as Done: Easily cross off or delete items when they're complete. No annoying reminders as deadlines approach.
