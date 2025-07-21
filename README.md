@@ -3,7 +3,7 @@ A fully functional and customizable Notes and Todo list app template, designed t
 
 ![Language](https://img.shields.io/github/languages/top/cortinico/kotlin-android-template?color=blue&logo=kotlin)
 ![GitHub repo size](https://img.shields.io/github/repo-size/myofficework000/ScreenshotTesting)  
-![GitHub stars](https://img.shields.io/github/stars/myofficework000/ScreenshotTesting?style=social)  
+![GitHub stars](https://img.shields.io/github/stars/myofficework000/JetpackComposeLottieAnimation?style=social)  
 ![Contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)
 
 
