@@ -1,4 +1,4 @@
-📋 Notes and Todo List App
+📋 Notes & Todo List App
 A fully functional and customizable Notes and Todo list app template, designed to help you organize tasks and ideas.
 
 ![Language](https://img.shields.io/github/languages/top/cortinico/kotlin-android-template?color=blue&logo=kotlin)
