@@ -1,5 +1,5 @@
 📋 Notes & Todo-List App
-A fully functional Notes and Todo list app template, designed to help you organize tasks and ideas.
+A fully functional Notes and Todo list app template, designed to help you organize tasks and idea.
 
 ![Language](https://img.shields.io/github/languages/top/cortinico/kotlin-android-template?color=blue&logo=kotlin)
 ![GitHub repo size](https://img.shields.io/github/repo-size/myofficework000/ScreenshotTesting)  
