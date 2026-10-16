@@ -1,44 +1,66 @@
-📋 Notes & Todo-List
-A fully functional Notes and Todo list app template, designed to help you organize tasks and idea
+# Notes & To-Do
 
-![Language](https://img.shields.io/github/languages/top/cortinico/kotlin-android-template?color=blue&logo=kotlin)
-![GitHub repo size](https://img.shields.io/github/repo-size/myofficework000/ScreenshotTesting)  
-![GitHub stars](https://img.shields.io/github/stars/myofficework000/JetpackComposeLottieAnimation?style=social)  
-![Contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)
+[![Android CI](https://github.com/myofficework000/Notes-and-Todo-app/actions/workflows/main.yml/badge.svg?branch=master)](https://github.com/myofficework000/Notes-and-Todo-app/actions/workflows/main.yml)
+[![Kotlin](https://img.shields.io/badge/Kotlin-2.4.21-7F52FF?logo=kotlin&logoColor=white)](https://kotlinlang.org/)
+[![Min SDK](https://img.shields.io/badge/minSdk-24-3DDC84?logo=android&logoColor=white)](https://developer.android.com/)
 
+A native Android notes and task manager focused on quick capture, simple organization, and distraction-free daily planning. The app is built with Kotlin, the AndroidX stack, Room persistence, Navigation, and View Binding.
 
-Features Overview
-📝 Todo List
-Organize Events: Add tasks with categories, set priorities, and include detailed descriptions.
-Mark as Done: Easily cross off or delete items when they're complete. No annoying reminders as deadlines approach.
-📒 Notes
-Customizable Notes: Add notes with personalized background colors, text colors, and font sizes. Embed URLs for additional context.
-Favorites & Security: Mark important notes as favorites and lock them for extra privacy.
-✨ Key Features
-Create, view, update, and delete Todos and Notes.
-Categorize tasks and set priorities in the Todo list.
-Customization options for notes, including colors and fonts.
-Mark notes as favorites and lock them for security.
-Simple and intuitive user interface.
-No annoying reminders for incomplete tasks.
-📸 Screenshots
-Click the images below to enlarge.
+## Highlights
 
-<p align="center"> <img src="https://github.com/cheetahmail007/Notes-and-Todo-app/blob/master/app/src/main/assets/1.png" height="500" width="250" hspace="40"> <img src="https://github.com/cheetahmail007/Notes-and-Todo-app/blob/master/app/src/main/assets/2.png" height="500" width="250" hspace="40"> <img src="https://github.com/cheetahmail007/Notes-and-Todo-app/blob/master/app/src/main/assets/3.png" height="500" width="250" hspace="40"> <img src="https://github.com/cheetahmail007/Notes-and-Todo-app/blob/master/app/src/main/assets/4.png" height="500" width="250" hspace="40"> <img src="https://github.com/cheetahmail007/Notes-and-Todo-app/blob/master/app/src/main/assets/5.png" height="500" width="250" hspace="40"> <img src="https://github.com/cheetahmail007/Notes-and-Todo-app/blob/master/app/src/main/assets/6.png" height="500" width="250" hspace="40"> </p>
-🛠 Built With
-Kotlin: Official programming language for Android development.
-Android Architecture Components:
-LiveData: Observable data holder class.
-ViewModel: Handles UI-related data in a lifecycle-conscious way.
-ViewBinding: Simplifies binding views without using findViewById().
-Material Components: Modern, customizable UI components for building sleek Android apps.
-📢 Contribution
-We welcome contributions! If you'd like to improve this project or add new features, feel free to submit a pull request or open an issue.
+- Create, edit, organize, complete, and delete to-do items.
+- Capture rich notes with custom colors, text sizes, links, favorites, and optional locking.
+- Keep data on-device with a Room-backed local database.
+- Navigate cleanly between the dashboard, notes, and task details.
+- Follow an MVVM-oriented structure with `ViewModel`, `LiveData`, coroutines, and DAOs.
 
-💬 Let's Connect!
-Feel free to reach out or follow me on:
+## Tech stack
 
-GitHub
-LinkedIn
-Medium
-Don't forget to ⭐ the repo—it motivates me to keep sharing more open-source projects!
+| Area | Technology |
+| --- | --- |
+| Language | Kotlin 2.4.21 |
+| Build | Android Gradle Plugin 9.4.1 · Gradle 9.6 |
+| UI | Android Views · View Binding · Material Components · ConstraintLayout |
+| Architecture | ViewModel · LiveData · Navigation |
+| Data | Room 2.8.5 · Kotlin Symbol Processing (KSP) |
+| Async | Kotlin Coroutines 1.11.0 |
+| Testing | JUnit · AndroidX Test · Espresso · MockK |
+
+## Requirements
+
+- Android Studio with JDK 17 or later
+- Android SDK Platform 37
+- A device or emulator running Android 7.0 (API 24) or newer
+
+## Build and test
+
+```bash
+./gradlew assembleDebug
+./gradlew test
+```
+
+The debug APK is generated at `app/build/outputs/apk/debug/app-debug.apk`.
+
+## Screens
+
+<p align="center">
+  <img src="app/src/main/assets/1.png" width="200" alt="Dashboard" />
+  <img src="app/src/main/assets/2.png" width="200" alt="To-do list" />
+  <img src="app/src/main/assets/3.png" width="200" alt="Notes" />
+  <img src="app/src/main/assets/4.png" width="200" alt="Note editor" />
+</p>
+
+<p align="center">
+  <img src="app/src/main/assets/5.png" width="200" alt="Task details" />
+  <img src="app/src/main/assets/6.png" width="200" alt="Customization" />
+  <img src="app/src/main/assets/7.png" width="200" alt="App flow" />
+  <img src="app/src/main/assets/8.png" width="200" alt="Notes and tasks" />
+</p>
+
+## Contributing
+
+Issues and pull requests are welcome. Please open an issue before proposing large changes so the approach can be discussed first.
+
+## Author
+
+Built by [Abhishek Pathak](https://github.com/myofficework000). If this project is useful, a star helps others discover it.
